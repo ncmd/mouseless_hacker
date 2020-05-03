@@ -1,0 +1,14 @@
+filter_exec: "/Applications/Visual Studio Code.app"
+# fitler_title: "com.microsoft.VSCode"
+# filter_class: "com.microsoft.VSCode"
+
+name: vim
+parent: 
+
+matches:
+  # Simple text replacements
+  - trigger: ":srl"
+    replace: ":%s/$|$/new/"
+
+  - trigger: ":srg"
+    replace: ":%s/$|$/new/g"
