@@ -4,4 +4,4 @@ cat ~/.vimrc > ./.vimrc
 cat ~/.zshrc > ./.zshrc
 git add .
 git commit -m "Updated configuration"
-
+git push
