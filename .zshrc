@@ -3,6 +3,7 @@ export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export PIER_CONFIG_PATH="/Users/charleschong/pier.toml"
 export EDITOR="/usr/local/bin/nvim"
 alias vim="nvim"
+alias s="cd /Users/charleschong/go/src/securethebox_rs && nvim -S"
 alias g="git"
 alias p="python3"
 alias c="git add . && git commit -m 'quick deploy' && git push"

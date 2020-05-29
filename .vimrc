@@ -23,13 +23,14 @@ set smartindent
     " keep visual mode when indenting
 vnoremap < <gv
 vnoremap > >gv
+
 set nu
-"set nowrap
+set nowrap
 set smartcase
 set noswapfile
 set nobackup
 set incsearch
-set scrolloff=99999
+set scrolloff=0
 set autoread
 
 " MAP Leader (as <leader>, press SPACE once, DO NOT HOLD)
@@ -50,7 +51,7 @@ autocmd WinEnter * setlocal cursorline
 autocmd WinLeave * setlocal nocursorline
 
     " VimBeGood helper
-highlight CursorLine guibg=#30ffff ctermbg=darkgrey
+highlight CursorLine guibg=#303030 ctermbg=darkgrey
 highlight LineNr ctermfg=black ctermbg=grey
 highlight clear LineNr
 highlight clear SignColumn
@@ -71,6 +72,7 @@ if exists('g:vscode')
 else
     " ordinary neovim
     " COLEMAK setup
+  nnoremap <>
   nnoremap u i
   vnoremap u i
     " undo
@@ -87,15 +89,11 @@ else
     " right
   nnoremap i l
   vnoremap i l
-    " left = h
-    " Jump up/down 20 lines
-    " Backspace once
-  " map <leader>nn 20j
-  " map <leader>ee 20k
+    " left =nn h
     " VIM plugin manager
 call plug#begin('~/.config/nvim/plugged')
 
-    " type :VimBeGood to play
+   " type :VimBeGood to play
 Plug 'ThePrimeagen/vim-be-good'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
     " VIM theme
@@ -115,12 +113,17 @@ Plug 'phildawes/racer'
 Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
 Plug 'vim-syntastic/syntastic'
+Plug 'dense-analysis/ale'
 
     " GraphQL
 Plug 'jparise/vim-graphql'
 
     " VIM autocomplete suggestions
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+nnoremap <leader>cocr :CocRestart<CR>
+    " :coc-marketplace
+    " :coc-rls
+
 set wildmode=longest,list,full
 
 Plug 'sheerun/vim-polyglot'
@@ -133,7 +136,7 @@ Plug 'jremmen/vim-ripgrep'
     " :Files = fuzzzy search file by path and name
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-map <leader><BS> :Files<cr>
+map <leader><BS> :Files<CR>
     " fuzzy search cli
 Plug 'lotabout/skim', { 'dir': '~/.skim', 'do': './install' }
 Plug 'lotabout/skim'
@@ -183,10 +186,11 @@ Plug 'tpope/vim-surround'
     " Comment block in visual mode with 'gc'
 Plug 'tomtom/tcomment_vim'
 
-   " Move current line up/down with 'shift+up/down'
-Plug 'vim-scripts/upAndDown'
-map <leader>, <S-Up><CR>
-map <leader>. <S-Down><CR>
+   " Move selected line up/down with <leader>,/<leader>.
+" move selected lines up one line
+" move selected lines down one line
+xnoremap N :m-2<CR>gv=gv
+xnoremap E :m'>+<CR>gv=gv
     " Repeat command
 Plug 'tpope/vim-repeat'
     "silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
@@ -209,7 +213,6 @@ map <leader>cd :NERDTreeFind<CR>
 map <leader>w :tabnext<CR>
 map <leader>q :tabprevious<CR>
 
-
 "==============================================================================
 " WINDOWS
 "==============================================================================
@@ -222,7 +225,9 @@ map <leader>N :sp<CR>
 " :q! = close window
 map <leader>d :q!<CR>
 " :q! = close window
-map <leader>s :w<CR>
+map <leader>s :w<CR><C-c>
+" open recently closed split window
+nmap <c-s-t> :vs<bar>:b#<CR>
 
 " WINDOW NAVIGATION
 " - move down
@@ -262,10 +267,18 @@ call plug#end()
 "==============================================================================
 "Activate Plug features
 "==============================================================================
+" Always show syntastic window
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 let g:rainbow_active = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:vimspector_enable_mappings = 'HUMAN'
-let g:nerdtree_tabs_open_on_console_startup = 0
 let NERDTreeShowHidden = 1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
@@ -283,6 +296,36 @@ let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 " Enable NERDCommenterToggle to check all selected lines is commented or not
 let g:NERDToggleCheckAllLines = 1
+
+
+" Open NERDTree on gvim/macvim startup. (When set to 2, open only if directory was given as startup argument).
+let g:nerdtree_tabs_open_on_gui_startup = 1
+" Open NERDTree on console vim startup. (When set to 2, open only if directory was given as startup argument).
+let g:nerdtree_tabs_open_on_console_startup = 1
+" Do not open NERDTree if vim starts in diff mode
+let g:nerdtree_tabs_no_startup_for_diff = 1
+" On startup, focus NERDTree if opening a directory, focus file if opening a file. (When set to 2, always focus file window after startup).
+let g:nerdtree_tabs_smart_startup_focus = 2
+" Open NERDTree on new tab creation (if NERDTree was globally opened by :NERDTreeTabsToggle)
+let g:nerdtree_tabs_open_on_new_tab = 1
+" Unfocus NERDTree when leaving a tab for descriptive tab names
+let g:nerdtree_tabs_meaningful_tab_names = 1
+" Close current tab if there is only one window in it and it's NERDTree
+let g:nerdtree_tabs_autoclose = 0
+" Synchronize view of all NERDTree windows (scroll and cursor position)
+let g:nerdtree_tabs_synchronize_view = 1
+" Synchronize focus when switching windows (focus NERDTree after tab switch if and only if it was focused before tab switch)
+let g:nerdtree_tabs_synchronize_focus = 1
+" When switching into a tab, make sure that focus is on the file window, not in the NERDTree window. (Note that this can get annoying if you use NERDTree's feature "open in new tab silently", as you will lose focus on the NERDTree.)
+let g:nerdtree_tabs_focus_on_files = 1
+" When given a directory name as a command line parameter when launching Vim, :cd into it.
+let g:nerdtree_tabs_startup_cd = 0
+" Automatically find and select currently opened file in NERDTree.
+let g:nerdtree_tabs_autofind = 1
+
+" Ale
+let g:ale_linters = {'rust': ['analyzer']}
+
 " Rustfmt autosave
 let g:rustfmt_autosave = 1
     " Nerdtree, remap directional keys to arrow keys
@@ -314,5 +357,14 @@ autocmd bufwritepost .vimrc source $MYVIMRC
 
 " bug fix to nerdtree + vim-obsession
 set sessionoptions-=blank
+
+
+fun! TrimWhitespace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfun
+
+autocmd BufWritePre * :call TrimWhitespace()
 
 endif
