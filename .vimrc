@@ -204,13 +204,11 @@ Plug 'tpope/vim-abolish'
 "
 
 Plug 'Chiel92/vim-autoformat'
-" Plug 'eraserhd/parinfer-rust', {'do': 'cargo build --release'}
+Plug 'eraserhd/parinfer-rust', {'do': 'cargo build --release'}
 Plug 'google/vim-maktaba'
 Plug 'google/vim-codefmt'
 Plug 'google/vim-glaive'
 augroup autoformat_settings
-  autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
-  autocmd FileType python AutoFormatBuffer yapf
   autocmd FileType rust AutoFormatBuffer rustfmt
 augroup END
 Plug 'godlygeek/tabular'
@@ -238,6 +236,9 @@ Plug 'tpope/vim-repeat'
 "==============================================================================
 " Tabs
 "==============================================================================
+"
+"
+
 Plug 'preservim/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 "   - t = Open selected to new tab
@@ -296,12 +297,11 @@ call plug#end()
 
 "==============================================================================
 "Activate Plug features
+"
 
 " Rust Docs
-" let g:rust_doc#downloaded_rust_doc_dir = '~/rust-docs/'
-"
-" let g:racer_experimental_completer = 1
-" let g:racer_insert_paren = 1
+let g:rust_doc#downloaded_rust_doc_dir = '~/rust-docs/'
+
 
 " YouCompleteMe with RUST
 let g:ycm_language_server =
