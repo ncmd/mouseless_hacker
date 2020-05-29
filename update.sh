@@ -1,4 +1,4 @@
-cat ~/.pier.toml > ./.pier.toml
+cat ~/pier.toml > ./pier.toml
 cat ~/.tmux.conf > ./.tmux.conf
 cat ~/.vimrc > ./.vimrc
 cat ~/.zshrc > ./.zshrc
