@@ -1,0 +1,14 @@
+{
+
+    "suggest.floatEnable": true,
+    "coc.preferences.hoverTarget": "preview",
+    "rust.show_hover_context": true,
+    "rust.racer_completion": true,
+    "rust.full_docs": true,
+    "rust-analyzer.diagnostics.enable": true,
+    "suggest.enablePreview": true,
+    "rust-client.revealOutputChannelOn": "info",
+    "rust-client.updateOnStartup": true,
+    "rust-client.channel": "nightly",
+    "coc.preferences.formatOnSaveFiletypes": ["rust"]
+}
