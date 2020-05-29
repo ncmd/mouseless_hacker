@@ -1,11 +1,10 @@
-    " INITIAL SETUP
-    " - FIRENVIM: Chrome/Brave
-    "   If on Mac OS X, install VimMode.spoon + Hammerspoon:
-    "   bash <(curl -s https://raw.githubusercontent.com/dbalatero/VimMode.spoon/vim-mode-v2/bin/installer)
-    "
-    " - TMUX: Reduce escape delay
-    " add 'set -sg escape-time 1'
-    " reload tmux: ctrl+w ':source-file ~/.tmux.conf'
+"==============================================================================
+" INITIAL SETUP
+"
+" - TMUX: Reduce escape delay
+" add 'set -sg escape-time 1'
+" reload tmux: ctrl+w ':source-file ~/.tmux.conf'
+"==============================================================================
 
 syntax on
     " Allow paste into vim
@@ -21,6 +20,7 @@ set shiftwidth=4
 set expandtab
 set smartindent
     " keep visual mode when indenting
+    " use shift+< or shift+>
 vnoremap < <gv
 vnoremap > >gv
 
@@ -44,7 +44,7 @@ set cmdheight=1
 set updatetime=1
 
 set colorcolumn=80
-highlight ColorColumn ctermbg=0 guibg=lightgrey
+highlight ColorColumn ctermbg=0 guibg=#303030
 
 hi cursorline cterm=none term=none
 autocmd WinEnter * setlocal cursorline
@@ -72,7 +72,6 @@ if exists('g:vscode')
 else
     " ordinary neovim
     " COLEMAK setup
-  nnoremap <>
   nnoremap u i
   vnoremap u i
     " undo
@@ -89,7 +88,10 @@ else
     " right
   nnoremap i l
   vnoremap i l
-    " left =nn h
+    " left = h
+  nnoremap s g
+  vnoremap s g
+
     " VIM plugin manager
 call plug#begin('~/.config/nvim/plugged')
 
@@ -109,19 +111,33 @@ Plug 'edkolev/tmuxline.vim'
 Plug 'christoomey/vim-tmux-navigator'
 
     " Rust
-Plug 'phildawes/racer'
 Plug 'rust-lang/rust.vim'
-Plug 'racer-rust/vim-racer'
-Plug 'vim-syntastic/syntastic'
 Plug 'dense-analysis/ale'
 
-    " GraphQL
-Plug 'jparise/vim-graphql'
+"==============================================================================
+" VIM autocomplete suggestions
+"==============================================================================
+Plug 'ycm-core/YouCompleteMe'
+    " need to install rust completer:
+    " cd ~/.config/nvim/YouCompleteMe
+    " python3 install.py --rust-completer
+nnoremap <leader>yr :YcmCompleter RestartServer<CR>
 
-    " VIM autocomplete suggestions
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-nnoremap <leader>cocr :CocRestart<CR>
+" GoTo code navigation.
+nmap <leader>do <Plug>(rust-doc)
+nmap <leader>gd <Plug>(coc-definition)
+nmap <leader>gt <Plug>(coc-type-definition)
+nmap <leader>gi <Plug>(coc-implementation)
+nmap <leader>gr <Plug>(coc-references)
+nmap <leader>gr <Plug>(coc-rename)
+nmap <leader>gb <Plug>(coc-diagnostic-prev)
+nmap <leader>gn <Plug>(coc-diagnostic-next)
+nmap <silent> <leader>gb <Plug>(coc-diagnostic-prev)
+nmap <silent> <leader>gn <Plug>(coc-diagnostic-next)
+nnoremap <leader>cr :CocRestart<CR>
     " :coc-marketplace
+map <leader>CM :CocList marketplace<CR>
     " :coc-rls
 
 set wildmode=longest,list,full
@@ -147,6 +163,21 @@ Plug 'ctrlpvim/ctrlp.vim'
     " Find text
 Plug 'easymotion/vim-easymotion'
     " Default = <leader><leader>f
+    " Search forward = /
+    " Search backward = ?
+    " Search current visible = g/
+Plug 'haya14busa/incsearch.vim'
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+Plug 'haya14busa/incsearch-fuzzy.vim'
+map f/ <Plug>(incsearch-fuzzy-/)
+map f? <Plug>(incsearch-fuzzy-?)
+map fg/ <Plug>(incsearch-fuzzy-stay)
+Plug 'haya14busa/incsearch-easymotion.vim'
+map z/ <Plug>(incsearch-easymotion-/)
+map z? <Plug>(incsearch-easymotion-?)
+map zg/ <Plug>(incsearch-easymotion-stay)
 
     " Text replace
 Plug 'tpope/vim-abolish'
@@ -170,11 +201,19 @@ Plug 'tpope/vim-abolish'
 "==============================================================================
 " Auto-format file on save
 "==============================================================================
-Plug 'Chiel92/vim-autoformat'
-Plug 'godlygeek/tabular'
+"
 
-    " Multiple Cursors
-Plug 'terryma/vim-multiple-cursors'
+Plug 'Chiel92/vim-autoformat'
+" Plug 'eraserhd/parinfer-rust', {'do': 'cargo build --release'}
+Plug 'google/vim-maktaba'
+Plug 'google/vim-codefmt'
+Plug 'google/vim-glaive'
+augroup autoformat_settings
+  autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
+  autocmd FileType python AutoFormatBuffer yapf
+  autocmd FileType rust AutoFormatBuffer rustfmt
+augroup END
+Plug 'godlygeek/tabular'
 
     " Matching Parentesis
 Plug 'luochen1990/rainbow'
@@ -185,6 +224,8 @@ Plug 'tpope/vim-surround'
     " Comment in normal mode with 'gcc'
     " Comment block in visual mode with 'gc'
 Plug 'tomtom/tcomment_vim'
+    " remap to <leader>c
+" map <leader>cc gcc
 
    " Move selected line up/down with <leader>,/<leader>.
 " move selected lines up one line
@@ -194,8 +235,6 @@ xnoremap E :m'>+<CR>gv=gv
     " Repeat command
 Plug 'tpope/vim-repeat'
     "silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
-    " Clipboard
-Plug 'svermeulen/vim-easyclip'
 "==============================================================================
 " Tabs
 "==============================================================================
@@ -219,13 +258,14 @@ map <leader>q :tabprevious<CR>
 set splitbelow
 set splitright
 " :vsp = vertical split
-map <leader>m :vsp<CR>
+map <leader>mm :vsp<CR>
 " :sp = horizontal split
-map <leader>N :sp<CR>
+map <leader>NN :sp<CR>
 " :q! = close window
-map <leader>d :q!<CR>
+map <leader>dd :q!<CR>
+map <leader>DD :qa!<CR>
 " :q! = close window
-map <leader>s :w<CR><C-c>
+map <leader>ss :w<CR><C-c>
 " open recently closed split window
 nmap <c-s-t> :vs<bar>:b#<CR>
 
@@ -240,25 +280,15 @@ nnoremap <leader>i <C-W><C-L>
 nnoremap <leader>h <C-W><C-H>
 
 Plug 'shougo/denite.nvim'
-Plug 'shougo/deol.nvim'
-    " Outside VIM(Chrome/Brave)
-Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
-
-    " Debugger
-Plug 'puremourning/vimspector'
-
-    " GIT
-Plug 'tpope/vim-fugitive'
-
-    " Databases
-Plug 'tpope/vim-dadbod'
-    " :DB mongodb:///test
-    " :DB g:prod = postgres://user:pass@db.example.com/production_database
-    " :DB g:prod drop table users
+Plug 'rhysd/rust-doc.vim'
+map <leader>df :RustDocFuzzy<Space>
+map <leader>dm :RustDocModule<Space>
 
     " Sessions
 Plug 'tpope/vim-obsession'
     " :mksession = create session as Session.vim in cwd
+map <leader>mk :mksession<CR>
+    "
     " :Obsess = start record session
     " :Obsess! = end record session
 
@@ -266,15 +296,23 @@ call plug#end()
 
 "==============================================================================
 "Activate Plug features
-"==============================================================================
-" Always show syntastic window
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+
+" Rust Docs
+" let g:rust_doc#downloaded_rust_doc_dir = '~/rust-docs/'
+"
+" let g:racer_experimental_completer = 1
+" let g:racer_insert_paren = 1
+
+" YouCompleteMe with RUST
+let g:ycm_language_server =
+  \ [
+  \   {
+  \     'name': 'rust',
+  \     'cmdline': [ 'ra_lsp_server' ],
+  \     'filetypes': [ 'rust' ],
+  \     'project_root_files': [ 'Cargo.toml' ]
+  \   }
+  \ ]
 
 let g:rainbow_active = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -296,7 +334,6 @@ let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 " Enable NERDCommenterToggle to check all selected lines is commented or not
 let g:NERDToggleCheckAllLines = 1
-
 
 " Open NERDTree on gvim/macvim startup. (When set to 2, open only if directory was given as startup argument).
 let g:nerdtree_tabs_open_on_gui_startup = 1
@@ -327,12 +364,15 @@ let g:nerdtree_tabs_autofind = 1
 let g:ale_linters = {'rust': ['analyzer']}
 
 " Rustfmt autosave
-let g:rustfmt_autosave = 1
+let g:rustfmt_autosave = 0
     " Nerdtree, remap directional keys to arrow keys
 autocmd FileType nerdtree noremap <buffer> e <Up>
 autocmd FileType nerdtree noremap <buffer> n <Down>
 autocmd FileType nerdtree noremap <buffer> h <Left>
 autocmd FileType nerdtree noremap <buffer> i <Right>
+
+let g:incsearch#auto_nohlsearch = 1
+map N  <Plug>(incsearch-nohl-N)
 
 "==============================================================================
 " VIM Activate theme
@@ -351,20 +391,8 @@ let g:lightline = {
 " NON-Plugin Commands
 "==============================================================================
 "
-" Auto Save Vimrc
-map <leader>vimrc :tabe ~/.vim/.vimrc<cr>
-autocmd bufwritepost .vimrc source $MYVIMRC
 
 " bug fix to nerdtree + vim-obsession
 set sessionoptions-=blank
-
-
-fun! TrimWhitespace()
-    let l:save = winsaveview()
-    keeppatterns %s/\s\+$//e
-    call winrestview(l:save)
-endfun
-
-autocmd BufWritePre * :call TrimWhitespace()
 
 endif
