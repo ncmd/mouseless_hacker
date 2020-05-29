@@ -3,6 +3,7 @@
 #         without any warranty.
 #         Copyright 2012— Gregory Pakosz (@gpakosz).
 
+
 # -- navigation ----------------------------------------------------------------
 
 # if you're running tmux within iTerm2
@@ -11,8 +12,7 @@
 #   - and iTerm2 is configured to send [1;9A -> [1;9D for option + arrow keys
 # then uncomment the following line to make Meta + arrow keys mapping work
 #set -ga terminal-overrides "*:kUP3=\e[1;9A,*:kDN3=\e[1;9B,*:kRIT3=\e[1;9C,*:kLFT3=\e[1;9D"
-bind -n S-left  prev
-bind -n S-right next
+
 
 # -- windows & pane creation ---------------------------------------------------
 
@@ -294,7 +294,3 @@ tmux_conf_copy_to_os_clipboard=false
 
 # move status line to top
 #set -g status-position top
-
-set-option -g status-right ""
-set-option -g status-right '#{pane_current_path}'
-set-option -g status-interval
