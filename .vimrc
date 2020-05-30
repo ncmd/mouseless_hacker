@@ -97,6 +97,7 @@ else
     " left = h
   nnoremap s g
   vnoremap s g
+  nnoremap S <NOP>
 
     " VIM plugin manager
 call plug#begin('~/.config/nvim/plugged')
@@ -249,6 +250,8 @@ Plug 'tpope/vim-repeat'
 Plug 'preservim/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ryanoasis/vim-devicons'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 "   - t = Open selected to new tab
 "   - s = Open as Vertical Split window
@@ -374,6 +377,27 @@ let g:nerdtree_tabs_focus_on_files = 1
 let g:nerdtree_tabs_startup_cd = 0
 " Automatically find and select currently opened file in NERDTree.
 let g:nerdtree_tabs_autofind = 1
+
+
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:NERDTreeGitStatusNodeColorization = 1
+let g:NERDTreeGitStatusWithFlags = 1
+
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "⋆",            
+    \ "Staged"    : "•",            
+    \ "Untracked" : "∘",            
+    \ "Dirty"     : "⁖",            
+    \ "Clean"     : "✔︎",                   
+    \ }
+
+let g:NERDTreeColorMapCustom = {
+    \ "Modified"  : "#528AB3",  
+    \ "Staged"    : "#538B54",  
+    \ "Untracked" : "#BE5849",  
+    \ "Dirty"     : "#299999",  
+    \ "Clean"     : "#87939A"   
+    \ }
 
 " Ale
 let g:ale_linters = {'rust': ['analyzer']}
