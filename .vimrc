@@ -5,6 +5,12 @@
 " add 'set -sg escape-time 1'
 " reload tmux: ctrl+w ':source-file ~/.tmux.conf'
 "==============================================================================
+"
+" Source VIMRC
+map <leader>SS :source ~/.vimrc<CR>
+" Install PLUGINS
+map <leader>PI :PlugInstall<CR>
+map <leader>PC :PlugClean<CR>
 
 syntax on
     " Allow paste into vim
@@ -160,12 +166,14 @@ Plug 'lotabout/skim'
     " :CtrlPBuffer = find buffer
     " :CtrlPMixed = both
 Plug 'ctrlpvim/ctrlp.vim'
-    " Find text
+    " find text
 Plug 'easymotion/vim-easymotion'
-    " Default = <leader><leader>f
-    " Search forward = /
-    " Search backward = ?
-    " Search current visible = g/
+    " default = <leader><leader>f
+    " search forward = /
+    " search backward = ?
+    " search current visible = g/
+    " clear search
+map /// :let @/ = ""<CR>
 Plug 'haya14busa/incsearch.vim'
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
@@ -223,7 +231,7 @@ Plug 'tpope/vim-surround'
     " Comment block in visual mode with 'gc'
 Plug 'tomtom/tcomment_vim'
     " remap to <leader>c
-" map <leader>cc gcc
+map <leader>cc gcc<CR>
 
    " Move selected line up/down with <leader>,/<leader>.
 " move selected lines up one line
@@ -233,14 +241,15 @@ xnoremap E :m'>+<CR>gv=gv
     " Repeat command
 Plug 'tpope/vim-repeat'
     "silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
+
 "==============================================================================
 " Tabs
 "==============================================================================
-"
-"
 
 Plug 'preservim/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
 "   - t = Open selected to new tab
 "   - s = Open as Vertical Split window
 "   - i = Open as Horizontal Split window
@@ -258,6 +267,13 @@ map <leader>q :tabprevious<CR>
 "==============================================================================
 set splitbelow
 set splitright
+
+" Resize current window
+map H :vertical resize +5<CR>
+map I :vertical resize -5<CR>
+" Resize all evenly
+map = <C-w>=<CR>
+
 " :vsp = vertical split
 map <leader>mm :vsp<CR>
 " :sp = horizontal split
@@ -285,34 +301,33 @@ Plug 'rhysd/rust-doc.vim'
 map <leader>df :RustDocFuzzy<Space>
 map <leader>dm :RustDocModule<Space>
 
-    " Sessions
+" Sessions
 Plug 'tpope/vim-obsession'
-    " :mksession = create session as Session.vim in cwd
+" :mksession = create session as Session.vim in cwd
 map <leader>mk :mksession<CR>
-    "
-    " :Obsess = start record session
-    " :Obsess! = end record session
+"
+" :Obsess = start record session
+" :Obsess! = end record session
 
 call plug#end()
 
 "==============================================================================
 "Activate Plug features
-"
+"==============================================================================
 
 " Rust Docs
 let g:rust_doc#downloaded_rust_doc_dir = '~/rust-docs/'
 
-
 " YouCompleteMe with RUST
 let g:ycm_language_server =
-  \ [
-  \   {
-  \     'name': 'rust',
-  \     'cmdline': [ 'ra_lsp_server' ],
-  \     'filetypes': [ 'rust' ],
-  \     'project_root_files': [ 'Cargo.toml' ]
-  \   }
-  \ ]
+            \ [
+            \   {
+            \     'name': 'rust',
+            \     'cmdline': [ 'ra_lsp_server' ],
+            \     'filetypes': [ 'rust' ],
+            \     'project_root_files': [ 'Cargo.toml' ]
+            \   }
+            \ ]
 
 let g:rainbow_active = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -371,6 +386,7 @@ autocmd FileType nerdtree noremap <buffer> n <Down>
 autocmd FileType nerdtree noremap <buffer> h <Left>
 autocmd FileType nerdtree noremap <buffer> i <Right>
 
+" Vim incsearch with easymotion
 let g:incsearch#auto_nohlsearch = 1
 map N  <Plug>(incsearch-nohl-N)
 
