@@ -44,7 +44,12 @@ set cmdheight=1
 " delays and poor user experience.
 set updatetime=1
 
+set wrap
 set colorcolumn=80
+set textwidth=80
+set formatoptions-=t
+set wrapmargin=0
+
 highlight ColorColumn ctermbg=0 guibg=#303030
 
 hi cursorline cterm=none term=none
@@ -360,7 +365,6 @@ let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 " Enable NERDCommenterToggle to check all selected lines is commented or not
 let g:NERDToggleCheckAllLines = 1
-
 " Open NERDTree on gvim/macvim startup. (When set to 2, open only if directory was given as startup argument).
 let g:nerdtree_tabs_open_on_gui_startup = 1
 " Open NERDTree on console vim startup. (When set to 2, open only if directory was given as startup argument).
