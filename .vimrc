@@ -110,7 +110,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'ThePrimeagen/vim-be-good'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 " VIM theme
-Plug 'crusoexia/vim-monokai'
+Plug 'patstockwell/vim-monokai-tasty'
 " Airline Stuff
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -122,6 +122,7 @@ Plug 'edkolev/tmuxline.vim'
 Plug 'christoomey/vim-tmux-navigator'
 
 " Rust
+Plug 'arzg/vim-rust-syntax-ext'
 Plug 'rust-lang/rust.vim'
 Plug 'timonv/vim-cargo'
 nnoremap <leader>CB :CargoBuild<CR>
@@ -386,7 +387,6 @@ let g:nerdtree_tabs_startup_cd = 0
 let g:nerdtree_tabs_autofind = 1
 
 let g:NERDTreeShowIgnoredStatus = 1
-"
 let g:NERDTreeIndicatorMapCustom = {
     \ "Modified"  : "MODIFIED",
     \ "Staged"    : "STAGED",
@@ -419,15 +419,18 @@ map N  <Plug>(incsearch-nohl-N)
 "==============================================================================
 " VIM Activate theme
 "==============================================================================
-colorscheme monokai
+"let g:vim_monokai_tasty_italic = 1
+colorscheme vim-monokai-tasty
 set background=dark
 set termguicolors
 let &t_8f = "\<Esc>[38;2;%"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 let g:lightline = {
-      \ 'colorscheme': 'PaperColor',
+      \ 'colorscheme': 'monokai_tasty',
       \ }
+
+let g:airline_theme='monokai_tasty'
 
 "==============================================================================
 " NON-Plugin Commands
