@@ -5,28 +5,23 @@
 " add 'set -sg escape-time 1'
 " reload tmux: ctrl+w ':source-file ~/.tmux.conf'
 "==============================================================================
-"
-" Source VIMRC
-map <leader>SS :source ~/.vimrc<CR>
-" Install PLUGINS
-map <leader>PI :PlugInstall<CR>
-map <leader>PC :PlugClean<CR>
 
 syntax on
-    " Allow paste into vim
+" Allow paste into vim
 set mouse=
 set cursorline
 set nonumber
 set hidden
-    " no error sounds
+" no error sounds
 set noerrorbells
-    " tabs always 4 spaces
+" tabs always 4 spaces
 set tabstop=4 softtabstop=4
 set shiftwidth=4
 set expandtab
 set smartindent
-    " keep visual mode when indenting
-    " use shift+< or shift+>
+
+" keep visual mode when indenting
+" use shift+< or shift+>
 vnoremap < <gv
 vnoremap > >gv
 
@@ -56,78 +51,95 @@ hi cursorline cterm=none term=none
 autocmd WinEnter * setlocal cursorline
 autocmd WinLeave * setlocal nocursorline
 
-    " VimBeGood helper
+" VimBeGood helper
 highlight CursorLine guibg=#303030 ctermbg=darkgrey
 highlight LineNr ctermfg=black ctermbg=grey
 highlight clear LineNr
 highlight clear SignColumn
 set hlsearch
 hi Search guibg=LightBlue
-    " trailing spaces
+" trailing spaces
 let @/='\s\+$'
-let @/='\<DELETE ME\>'
-    " highlight wholeline
+" highlight wholeline
 let @/ = '.*'.@/.'.*'
 sign define wholeline linehl=ErrorMsg
 sign place 1 name=wholeline line=123
 
-    " vim-numbertoggle
+" vim-numbertoggle
 set number relativenumber
 if exists('g:vscode')
-    " VSCode extension
+" VSCode extension
 else
-    " ordinary neovim
-    " COLEMAK setup
+" ordinary neovim
+" COLEMAK setup
   nnoremap u i
   vnoremap u i
-    " undo
+" undo
   nnoremap U u
   vnoremap U u
-    " redo
+" redo
   noremap <leader>r <C-r>
-    " down
+" down
   nnoremap n j
   vnoremap n j
-    " up
+" up
   nnoremap e k
   vnoremap e k
-    " right
+" right
   nnoremap i l
   vnoremap i l
-    " left = h
-  nnoremap s g
-  vnoremap s g
-  nnoremap S <NOP>
+" left = h
 
-    " VIM plugin manager
+" Unmapping accidental normal mode keys
+  nnoremap E <NOP>
+  nnoremap s <NOP>
+  vnoremap s <NOP>
+  nnoremap S <NOP>
+  nnoremap A <NOP>
+  nnoremap S <NOP>
+  nnoremap S <NOP>
+  nnoremap M <NOP>
+  nnoremap m <NOP>
+  nnoremap j <NOP>
+  nnoremap k <NOP>
+
+" VIM plugin manager
 call plug#begin('~/.config/nvim/plugged')
 
-   " type :VimBeGood to play
+" type :VimBeGood to play
 Plug 'ThePrimeagen/vim-be-good'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
-    " VIM theme
+" VIM theme
 Plug 'crusoexia/vim-monokai'
-    " Airline Stuff
+" Airline Stuff
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'itchyny/lightline.vim'
 Plug 'edkolev/promptline.vim'
 Plug 'edkolev/tmuxline.vim'
 
-    " TMUX stuff
+" TMUX stuff
 Plug 'christoomey/vim-tmux-navigator'
 
-    " Rust
+" Rust
 Plug 'rust-lang/rust.vim'
+Plug 'timonv/vim-cargo'
+nnoremap <leader>CB :CargoBuild<CR>
+nnoremap <leader>CC :CargoClean<CR>
+nnoremap <leader>CD :CargoDoc<CR>
+nnoremap <leader>CR :CargoRun<CR>
+nnoremap <leader>CT :CargoTest<CR>
+nnoremap <leader>CU :CargoUpdate<CR>
+
 Plug 'dense-analysis/ale'
 
 "==============================================================================
 " VIM autocomplete suggestions
 "==============================================================================
 Plug 'ycm-core/YouCompleteMe'
-    " need to install rust completer:
-    " cd ~/.config/nvim/YouCompleteMe
-    " python3 install.py --rust-completer
+" need to install rust completer:
+" cd ~/.config/nvim/YouCompleteMe
+" python3 install.py --rust-completer
 nnoremap <leader>yr :YcmCompleter RestartServer<CR>
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -143,9 +155,9 @@ nmap <leader>gn <Plug>(coc-diagnostic-next)
 nmap <silent> <leader>gb <Plug>(coc-diagnostic-prev)
 nmap <silent> <leader>gn <Plug>(coc-diagnostic-next)
 nnoremap <leader>cr :CocRestart<CR>
-    " :coc-marketplace
 map <leader>CM :CocList marketplace<CR>
-    " :coc-rls
+" :coc-rls
+" :coc-marketplace
 
 set wildmode=longest,list,full
 
@@ -154,26 +166,26 @@ Plug 'sheerun/vim-polyglot'
 "==============================================================================
 " File/content search
 "==============================================================================
-    " :Rg = find content
+" :Rg = find content
 Plug 'jremmen/vim-ripgrep'
-    " :Files = fuzzzy search file by path and name
+" :Files = fuzzzy search file by path and name
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 map <leader><BS> :Files<CR>
-    " fuzzy search cli
+" fuzzy search cli
 Plug 'lotabout/skim', { 'dir': '~/.skim', 'do': './install' }
 Plug 'lotabout/skim'
-    " :CtrlP = find file
-    " :CtrlPBuffer = find buffer
-    " :CtrlPMixed = both
+" :CtrlP = find file
+" :CtrlPBuffer = find buffer
+" :CtrlPMixed = both
 Plug 'ctrlpvim/ctrlp.vim'
-    " find text
+" find text
 Plug 'easymotion/vim-easymotion'
-    " default = <leader><leader>f
-    " search forward = /
-    " search backward = ?
-    " search current visible = g/
-    " clear search
+" default = <leader><leader>f
+" search forward = /
+" search backward = ?
+" search current visible = g/
+" clear search
 map /// :let @/ = ""<CR>
 Plug 'haya14busa/incsearch.vim'
 map /  <Plug>(incsearch-forward)
@@ -188,32 +200,32 @@ map z/ <Plug>(incsearch-easymotion-/)
 map z? <Plug>(incsearch-easymotion-?)
 map zg/ <Plug>(incsearch-easymotion-stay)
 
-    " Text replace
+" Text replace
 Plug 'tpope/vim-abolish'
-    " REPLACE
-    "map <leader>a :Abolish {despa,sepe}rat{e,es,ed,ing,ely,ion,ions,or}  {despe,sepa}rat{}
-    " SUBSTITUTION
-    "map <leader>s  :%Subvert/facilit{y,ies}/building{,s}/g
-    "               :Subvert/blog{,s}/post{,s}/g
-    "               :Subvert/address{,es}/reference{,s}/g
-    "               :Subvert/child{,ren}/adult{,s}/g
-    "               :Subvert/di{e,ce}/spinner{,s}/g
-    " COERSION
-    " FOO_BAR -> foo_bar = crs (snake_case)
-    " fooBar -> FooBar = crm (MixedCase)
-    " foo_bar -> fooBar = crc (camelCase)
-    " fooBar -> FOO_BAR = cru (UPPERCASE)
-    " foo-bar -> foo-bar = cr- (dash-case)
-    " fooBar -> foo.bar = cr. (dot.case)
-    " fooBar -> foo bar = cr<space> (space case)
-    " fooBar -> Foo Bar = crt (Title Case)
+" REPLACE
+" map <leader>a :Abolish {despa,sepe}rat{e,es,ed,ing,ely,ion,ions,or} {despe,sepa}rat{}
+"
+" SUBSTITUTION
+" map <leader>s  :%Subvert/facilit{y,ies}/building{,s}/g
+"                :Subvert/blog{,s}/post{,s}/g
+"                :Subvert/address{,es}/reference{,s}/g
+"                :Subvert/child{,ren}/adult{,s}/g
+"                :Subvert/di{e,ce}/spinner{,s}/g
+" COERSION
+" FOO_BAR -> foo_bar = crs (snake_case)
+" fooBar -> FooBar = crm (MixedCase)
+" foo_bar -> fooBar = crc (camelCase)
+" fooBar -> FOO_BAR = cru (UPPERCASE)
+" foo-bar -> foo-bar = cr- (dash-case)
+" fooBar -> foo.bar = cr. (dot.case)
+" fooBar -> foo bar = cr<space> (space case)
+" fooBar -> Foo Bar = crt (Title Case)
+
 "==============================================================================
 " Auto-format file on save
 "==============================================================================
-"
 
 Plug 'Chiel92/vim-autoformat'
-Plug 'eraserhd/parinfer-rust', {'do': 'cargo build --release'}
 Plug 'google/vim-maktaba'
 Plug 'google/vim-codefmt'
 Plug 'google/vim-glaive'
@@ -222,36 +234,33 @@ augroup autoformat_settings
 augroup END
 Plug 'godlygeek/tabular'
 
-    " Matching Parentesis
+" Matching Parentesis
 Plug 'luochen1990/rainbow'
-    " Edit Surroundings
-    " cs'<a> = 'word' -> <a>word</a>
-    " cs]{ = [word] -> {word}
+" Edit Surroundings
+" cs'<a> = 'word' -> <a>word</a>
+" cs]{ = [word] -> {word}
 Plug 'tpope/vim-surround'
-    " Comment in normal mode with 'gcc'
-    " Comment block in visual mode with 'gc'
+" Comment in normal mode with 'gcc'
+" Comment block in visual mode with 'gc'
 Plug 'tomtom/tcomment_vim'
-    " remap to <leader>c
+" remap to <leader>c
 map <leader>cc gcc<CR>
 
-   " Move selected line up/down with <leader>,/<leader>.
-" move selected lines up one line
+let @/='\<DELETE ME\>'
 " move selected lines down one line
-xnoremap N :m-2<CR>gv=gv
-xnoremap E :m'>+<CR>gv=gv
-    " Repeat command
+" Repeat command
 Plug 'tpope/vim-repeat'
-    "silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
+"silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 
 "==============================================================================
 " Tabs
 "==============================================================================
 
 Plug 'preservim/nerdtree'
+"   - C = cd to directory
+"   - U = move up directory
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'ryanoasis/vim-devicons'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 "   - t = Open selected to new tab
 "   - s = Open as Vertical Split window
@@ -286,8 +295,6 @@ map <leader>dd :q!<CR>
 map <leader>DD :qa!<CR>
 " :q! = close window
 map <leader>ss :w<CR><C-c>
-" open recently closed split window
-nmap <c-s-t> :vs<bar>:b#<CR>
 
 " WINDOW NAVIGATION
 " - move down
@@ -334,7 +341,7 @@ let g:ycm_language_server =
 
 let g:rainbow_active = 1
 let g:airline#extensions#tabline#enabled = 1
-let g:vimspector_enable_mappings = 'HUMAN'
+
 let NERDTreeShowHidden = 1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
@@ -378,33 +385,28 @@ let g:nerdtree_tabs_startup_cd = 0
 " Automatically find and select currently opened file in NERDTree.
 let g:nerdtree_tabs_autofind = 1
 
-
-let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-let g:NERDTreeGitStatusNodeColorization = 1
-let g:NERDTreeGitStatusWithFlags = 1
-
+let g:NERDTreeShowIgnoredStatus = 1
+"
 let g:NERDTreeIndicatorMapCustom = {
-    \ "Modified"  : "⋆",            
-    \ "Staged"    : "•",            
-    \ "Untracked" : "∘",            
-    \ "Dirty"     : "⁖",            
-    \ "Clean"     : "✔︎",                   
+    \ "Modified"  : "MODIFIED",
+    \ "Staged"    : "STAGED",
+    \ "Untracked" : "UNTRACKED",
+    \ "Renamed"   : "RENAMED",
+    \ "Unmerged"  : "UNMERGED",
+    \ "Deleted"   : "DELETED",
+    \ "Dirty"     : "DIRTY",
+    \ "Clean"     : "CLEAN",
+    \ 'Ignored'   : 'IGNORED',
+    \ "Unknown"   : "UNKNOWN"
     \ }
 
-let g:NERDTreeColorMapCustom = {
-    \ "Modified"  : "#528AB3",  
-    \ "Staged"    : "#538B54",  
-    \ "Untracked" : "#BE5849",  
-    \ "Dirty"     : "#299999",  
-    \ "Clean"     : "#87939A"   
-    \ }
 
 " Ale
 let g:ale_linters = {'rust': ['analyzer']}
 
 " Rustfmt autosave
 let g:rustfmt_autosave = 0
-    " Nerdtree, remap directional keys to arrow keys
+" Nerdtree, remap directional keys to arrow keys
 autocmd FileType nerdtree noremap <buffer> e <Up>
 autocmd FileType nerdtree noremap <buffer> n <Down>
 autocmd FileType nerdtree noremap <buffer> h <Left>
@@ -430,9 +432,15 @@ let g:lightline = {
 "==============================================================================
 " NON-Plugin Commands
 "==============================================================================
-"
 
 " bug fix to nerdtree + vim-obsession
 set sessionoptions-=blank
+
+" Source VIMRC
+map <leader>FS :source ~/.vimrc<CR>
+" Install PLUGINS
+
+map <leader>FI :PlugInstall<CR>
+map <leader>FC :PlugClean<CR>
 
 endif
