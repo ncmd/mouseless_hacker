@@ -121,6 +121,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'itchyny/lightline.vim'
 Plug 'edkolev/promptline.vim'
+Plug 'powerline/powerline'
+Plug 'ryanoasis/vim-devicons'
 Plug 'edkolev/tmuxline.vim'
 
 " TMUX stuff
@@ -320,7 +322,7 @@ map <leader>dm :RustDocModule<Space>
 " Sessions
 Plug 'tpope/vim-obsession'
 " :mksession = create session as Session.vim in cwd
-map <leader>mk :mksession<CR>
+map <leader>mk :mksession!<CR>
 "
 " :Obsess = start record session
 " :Obsess! = end record session
@@ -346,7 +348,6 @@ let g:ycm_language_server =
             \ ]
 
 let g:rainbow_active = 1
-let g:airline#extensions#tabline#enabled = 1
 
 let NERDTreeShowHidden = 1
 let NERDTreeMinimalUI = 1
@@ -409,7 +410,7 @@ let g:NERDTreeIndicatorMapCustom = {
 let g:ale_linters = {'rust': ['analyzer']}
 
 " Rustfmt autosave
-let g:rustfmt_autosave = 0
+let g:rustfmt_autosave = 1
 " Nerdtree, remap directional keys to arrow keys
 autocmd FileType nerdtree noremap <buffer> e <Up>
 autocmd FileType nerdtree noremap <buffer> n <Down>
@@ -423,9 +424,8 @@ map N  <Plug>(incsearch-nohl-N)
 "==============================================================================
 " VIM Activate theme
 "==============================================================================
-"let g:vim_monokai_tasty_italic = 1
-colorscheme vim-monokai-tasty
 set background=dark
+colorscheme vim-monokai-tasty
 set termguicolors
 let &t_8f = "\<Esc>[38;2;%"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
@@ -433,8 +433,12 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 let g:lightline = {
       \ 'colorscheme': 'monokai_tasty',
       \ }
-
+let g:promptline_theme = 'monokai_tasty'
 let g:airline_theme='monokai_tasty'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_extensions = ['branch', 'tabline']
+let g:airline_powerline_fonts = 1
+let g:vim_monokai_tasty_italic = 1
 
 "==============================================================================
 " NON-Plugin Commands
