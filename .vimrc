@@ -123,7 +123,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'itchyny/lightline.vim'
 Plug 'edkolev/promptline.vim'
 Plug 'powerline/powerline'
-" Plug 'ryanoasis/vim-devicons'
 Plug 'edkolev/tmuxline.vim'
 
 " TMUX stuff
@@ -167,6 +166,7 @@ nnoremap <leader>cr :CocRestart<CR>
 map <leader>CM :CocList marketplace<CR>
 " :coc-rls
 " :coc-marketplace
+" :coc-rust-analyzer
 
 set wildmode=longest,list,full
 
@@ -244,7 +244,7 @@ augroup END
 Plug 'godlygeek/tabular'
 
 " Matching Parentesis
-Plug 'luochen1990/rainbow'
+Plug 'frazrepo/vim-rainbow'
 " Edit Surroundings
 " cs'<a> = 'word' -> <a>word</a>
 " cs]{ = [word] -> {word}
@@ -328,6 +328,7 @@ map <leader>mk :mksession!<CR>
 " :Obsess = start record session
 " :Obsess! = end record session
 
+Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 call plug#end()
 
 "==============================================================================
@@ -349,6 +350,14 @@ let g:ycm_language_server =
             \ ]
 
 let g:rainbow_active = 1
+let g:rainbow_load_separately = [
+    \ [ '*' , [['(', ')'], ['\[', '\]'], ['{', '}']] ],
+    \ [ '*.rs' , [['(', ')'], ['\[', '\]'], ['{', '}']] ],
+    \ [ '*.{html,htm}' , [['(', ')'], ['\[', '\]'], ['{', '}'], ['<\a[^>]*>', '</[^>]*>']] ],
+    \ ]
+
+let g:rainbow_guifgs = ['RoyalBlue3', 'DarkOrange3', 'DarkOrchid3', 'FireBrick']
+let g:rainbow_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'red', 'magenta']
 
 let NERDTreeShowHidden = 1
 let NERDTreeMinimalUI = 1
@@ -422,6 +431,9 @@ autocmd FileType nerdtree noremap <buffer> i <Right>
 let g:incsearch#auto_nohlsearch = 1
 map N  <Plug>(incsearch-nohl-N)
 
+set timeoutlen=1
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+
 "==============================================================================
 " VIM Activate theme
 "==============================================================================
@@ -440,6 +452,7 @@ let g:airline_theme='monokai_tasty'
 " let g:airline_extensions = ['branch', 'tabline']
 let g:airline_powerline_fonts = 1
 " let g:vim_monokai_tasty_italic = 1
+
 
 "==============================================================================
 " NON-Plugin Commands
