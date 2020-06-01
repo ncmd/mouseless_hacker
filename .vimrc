@@ -19,6 +19,7 @@ set tabstop=4 softtabstop=4
 set shiftwidth=4
 set expandtab
 set smartindent
+set guifont=Hack\ Nerd\ Font\ 12
 
 " keep visual mode when indenting
 " use shift+< or shift+>
@@ -122,14 +123,14 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'itchyny/lightline.vim'
 Plug 'edkolev/promptline.vim'
 Plug 'powerline/powerline'
-Plug 'ryanoasis/vim-devicons'
+" Plug 'ryanoasis/vim-devicons'
 Plug 'edkolev/tmuxline.vim'
 
 " TMUX stuff
 Plug 'christoomey/vim-tmux-navigator'
 
 " Rust
-Plug 'arzg/vim-rust-syntax-ext'
+" Plug 'arzg/vim-rust-syntax-ext'
 Plug 'rust-lang/rust.vim'
 Plug 'timonv/vim-cargo'
 nnoremap <leader>CB :CargoBuild<CR>
@@ -435,10 +436,10 @@ let g:lightline = {
       \ }
 let g:promptline_theme = 'monokai_tasty'
 let g:airline_theme='monokai_tasty'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_extensions = ['branch', 'tabline']
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline_extensions = ['branch', 'tabline']
 let g:airline_powerline_fonts = 1
-let g:vim_monokai_tasty_italic = 1
+" let g:vim_monokai_tasty_italic = 1
 
 "==============================================================================
 " NON-Plugin Commands
