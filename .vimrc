@@ -26,14 +26,7 @@ set guifont=Hack\ Nerd\ Font\ 12
 vnoremap < <gv
 vnoremap > >gv
 
-set nu
-set nowrap
-set smartcase
-set noswapfile
-set nobackup
 set incsearch
-set scrolloff=0
-set autoread
 
 " MAP Leader (as <leader>, press SPACE once, DO NOT HOLD)
 let mapleader="\<Space>"
@@ -99,6 +92,8 @@ else
 " left = h
 "
   nnoremap Y "*y
+  nnoremap 7 10j
+  nnoremap 8 10k
 "
 " Go back after GoTo definition
   nnoremap <leader>o <C-o><CR>
@@ -137,7 +132,6 @@ Plug 'christoomey/vim-tmux-navigator'
 " Rust
 " Plug 'arzg/vim-rust-syntax-ext'
 Plug 'rust-lang/rust.vim'
-Plug 'timonv/vim-cargo'
 nnoremap <leader>CB :CargoBuild<CR>
 nnoremap <leader>CC :CargoClean<CR>
 nnoremap <leader>CD :CargoDoc<CR>
@@ -175,26 +169,20 @@ Plug 'sheerun/vim-polyglot'
 "==============================================================================
 " File/content search
 "==============================================================================
-" :Rg = find content
-Plug 'jremmen/vim-ripgrep'
 " :Files = fuzzzy search file by path and name
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 map <leader><BS> :Files<CR>
-" fuzzy search cli
-Plug 'lotabout/skim', { 'dir': '~/.skim', 'do': './install' }
-Plug 'lotabout/skim'
-" :CtrlP = find file
-" :CtrlPBuffer = find buffer
-" :CtrlPMixed = both
-Plug 'ctrlpvim/ctrlp.vim'
 " find text
 Plug 'easymotion/vim-easymotion'
-" default = <leader><leader>f
+" activate = <leader>ff
 " search forward = /
 " search backward = ?
 " search current visible = g/
 " clear search
+map s <Plug>(easymotion-overwin-f)
+" repeat search
+map sr <Plug>(easymotion-repeat)
 map /// :let @/ = ""<CR>
 Plug 'haya14busa/incsearch.vim'
 map /  <Plug>(incsearch-forward)
@@ -445,7 +433,8 @@ autocmd FileType nerdtree noremap <buffer> i <Right>
 " Vim incsearch with easymotion
 let g:incsearch#auto_nohlsearch = 1
 map N  <Plug>(incsearch-nohl-N)
-
+let g:EasyMotion_do_mapping = 0
+let g:EasyMotion_smartcase = 1
 "==============================================================================
 " VIM Activate theme
 "==============================================================================
@@ -461,7 +450,6 @@ let g:lightline = {
 let g:promptline_theme = 'monokai_tasty'
 let g:airline_theme='monokai_tasty'
 let g:airline_powerline_fonts = 1
-
 
 "==============================================================================
 " NON-Plugin Commands
