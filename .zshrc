@@ -31,6 +31,7 @@ alias pg="pier list | grep "
 export PATH="$PATH:`yarn global bin`"
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/charleschong/.oh-my-zsh"
+alias drx="cd /Users/charleschong/.config/karabiner/assets/complex_modifications"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,

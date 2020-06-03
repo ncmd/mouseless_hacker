@@ -50,6 +50,8 @@ set colorcolumn=80
 set textwidth=80
 set formatoptions-=t
 set wrapmargin=0
+set breakindent
+let &showbreak='    '
 
 highlight ColorColumn ctermbg=0 guibg=#303030
 
@@ -95,6 +97,11 @@ else
   nnoremap i l
   vnoremap i l
 " left = h
+"
+  nnoremap Y "*y
+"
+" Go back after GoTo definition
+  nnoremap <leader>o <C-o><CR>
 
 " Unmapping accidental normal mode keys
   nnoremap E <NOP>
@@ -253,13 +260,12 @@ Plug 'tpope/vim-surround'
 " Comment block in visual mode with 'gc'
 Plug 'tomtom/tcomment_vim'
 " remap to <leader>c
-map <leader>cc gcc<CR>
+map <leader>cc gcc
 
 let @/='\<DELETE ME\>'
 " move selected lines down one line
 " Repeat command
 Plug 'tpope/vim-repeat'
-"silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 
 "==============================================================================
 " Tabs
@@ -268,6 +274,7 @@ Plug 'tpope/vim-repeat'
 Plug 'preservim/nerdtree'
 "   - C = cd to directory
 "   - U = move up directory
+"   - I = show hidden files
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
@@ -328,7 +335,6 @@ map <leader>mk :mksession!<CR>
 " :Obsess = start record session
 " :Obsess! = end record session
 
-Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 call plug#end()
 
 "==============================================================================
@@ -431,9 +437,6 @@ autocmd FileType nerdtree noremap <buffer> i <Right>
 let g:incsearch#auto_nohlsearch = 1
 map N  <Plug>(incsearch-nohl-N)
 
-set timeoutlen=1
-nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
-
 "==============================================================================
 " VIM Activate theme
 "==============================================================================
@@ -448,10 +451,7 @@ let g:lightline = {
       \ }
 let g:promptline_theme = 'monokai_tasty'
 let g:airline_theme='monokai_tasty'
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline_extensions = ['branch', 'tabline']
 let g:airline_powerline_fonts = 1
-" let g:vim_monokai_tasty_italic = 1
 
 
 "==============================================================================
@@ -467,5 +467,6 @@ map <leader>FS :source ~/.vimrc<CR>
 
 map <leader>FI :PlugInstall<CR>
 map <leader>FC :PlugClean<CR>
+map <leader>FU :PlugUpdate<CR>
 
 endif
