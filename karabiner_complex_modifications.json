@@ -1105,6 +1105,55 @@
           ]
         }
       ]
+    },
+    {
+      "description": "Disable Minimize App when pressing m",
+      "manipulators": [
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "m",
+              "value": 1
+            },
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^io\\.alacritty$"
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "m"
+          },
+          "to": [
+            {
+              "key_code": "m"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^io\\.alacritty$"
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "m"
+          },
+          "to_if_held_down": [
+            {
+              "key_code": "m",
+              "repeat": false
+            }
+          ]
+        }
+      ]
     }
   ]
 }
