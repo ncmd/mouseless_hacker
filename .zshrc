@@ -140,3 +140,5 @@ if [ -f '/Users/charleschong/Downloads/google-cloud-sdk/completion.zsh.inc' ]; t
 # added by travis gem
 [ -f /Users/charleschong/.travis/travis.sh ] && source /Users/charleschong/.travis/travis.sh
 export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

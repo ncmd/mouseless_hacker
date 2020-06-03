@@ -112,7 +112,6 @@ else
   nnoremap S <NOP>
   nnoremap S <NOP>
   nnoremap M <NOP>
-  nnoremap m <NOP>
   nnoremap j <NOP>
   nnoremap k <NOP>
 
@@ -161,14 +160,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " GoTo code navigation.
 nmap <leader>do <Plug>(rust-doc)
 nmap <leader>gd <Plug>(coc-definition)
-nmap <leader>gt <Plug>(coc-type-definition)
-nmap <leader>gi <Plug>(coc-implementation)
+nmap <leader>gb <C-o>
 nmap <leader>gr <Plug>(coc-references)
-nmap <leader>gr <Plug>(coc-rename)
-nmap <leader>gb <Plug>(coc-diagnostic-prev)
-nmap <leader>gn <Plug>(coc-diagnostic-next)
-nmap <silent> <leader>gb <Plug>(coc-diagnostic-prev)
-nmap <silent> <leader>gn <Plug>(coc-diagnostic-next)
 nnoremap <leader>cr :CocRestart<CR>
 map <leader>CM :CocList marketplace<CR>
 " :coc-rls
@@ -334,6 +327,22 @@ map <leader>mk :mksession!<CR>
 "
 " :Obsess = start record session
 " :Obsess! = end record session
+
+Plug 'kshenoy/vim-signature'
+" mark
+nnoremap ma ma
+nnoremap mt mt
+nnoremap mm <NOP>
+" remove mark
+"   m
+map mx m-
+" next and previous mark
+nnoremap mn ]`
+nnoremap me [`
+" View all marks
+"   m/
+
+Plug 'jparise/vim-graphql'
 
 call plug#end()
 
