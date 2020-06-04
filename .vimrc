@@ -90,8 +90,11 @@ else
   nnoremap i l
   vnoremap i l
 " left = h
-"
+
+" Copy to clipboard
   nnoremap Y "*y
+
+" move up/down 10 lines
   nnoremap 7 10j
   nnoremap 8 10k
 "
@@ -233,7 +236,9 @@ Plug 'godlygeek/tabular'
 
 " Matching Parentesis
 Plug 'frazrepo/vim-rainbow'
+
 " Edit Surroundings
+" highlight word in visual mode -> shift+S -> {char} = {char}word{char}
 " cs'<a> = 'word' -> <a>word</a>
 " cs]{ = [word] -> {word}
 Plug 'tpope/vim-surround'
