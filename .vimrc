@@ -337,6 +337,9 @@ nnoremap me [`
 
 Plug 'jparise/vim-graphql'
 
+" Have same bash shortcuts in Insert mode
+Plug 'tpope/vim-rsi'
+
 call plug#end()
 
 "==============================================================================
