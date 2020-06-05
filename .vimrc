@@ -133,7 +133,6 @@ Plug 'edkolev/tmuxline.vim'
 Plug 'christoomey/vim-tmux-navigator'
 
 " Rust
-" Plug 'arzg/vim-rust-syntax-ext'
 Plug 'rust-lang/rust.vim'
 nnoremap <leader>CB :CargoBuild<CR>
 nnoremap <leader>CC :CargoClean<CR>
@@ -147,13 +146,10 @@ Plug 'dense-analysis/ale'
 "==============================================================================
 " VIM autocomplete suggestions
 "==============================================================================
-Plug 'ycm-core/YouCompleteMe'
-" need to install rust completer:
-" cd ~/.config/nvim/YouCompleteMe
-" python3 install.py --rust-completer
-nnoremap <leader>yr :YcmCompleter RestartServer<CR>
-
+" You will need to install racer via cargo
+Plug 'racer-rust/vim-racer'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 " GoTo code navigation.
 nmap <leader>do <Plug>(rust-doc)
 nmap <leader>gd <Plug>(coc-definition)
@@ -225,13 +221,6 @@ Plug 'tpope/vim-abolish'
 " Auto-format file on save
 "==============================================================================
 
-Plug 'Chiel92/vim-autoformat'
-Plug 'google/vim-maktaba'
-Plug 'google/vim-codefmt'
-Plug 'google/vim-glaive'
-augroup autoformat_settings
-  autocmd FileType rust AutoFormatBuffer rustfmt
-augroup END
 Plug 'godlygeek/tabular'
 
 " Matching Parentesis
@@ -349,16 +338,10 @@ call plug#end()
 " Rust Docs
 let g:rust_doc#downloaded_rust_doc_dir = '~/rust-docs/'
 
-" YouCompleteMe with RUST
-let g:ycm_language_server =
-            \ [
-            \   {
-            \     'name': 'rust',
-            \     'cmdline': [ 'ra_lsp_server' ],
-            \     'filetypes': [ 'rust' ],
-            \     'project_root_files': [ 'Cargo.toml' ]
-            \   }
-            \ ]
+set hidden
+let g:racer_cmd = "~/.cargo/bin/racer"
+
+let g:racer_experimental_completer = 1
 
 let g:rainbow_active = 1
 let g:rainbow_load_separately = [
@@ -431,7 +414,7 @@ let g:NERDTreeIndicatorMapCustom = {
 let g:ale_linters = {'rust': ['analyzer']}
 
 " Rustfmt autosave
-let g:rustfmt_autosave = 1
+let g:rustfmt_autosave = 0
 " Nerdtree, remap directional keys to arrow keys
 autocmd FileType nerdtree noremap <buffer> e <Up>
 autocmd FileType nerdtree noremap <buffer> n <Down>

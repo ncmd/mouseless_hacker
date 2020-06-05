@@ -1,13 +1,14 @@
 {
     "suggest.floatEnable": true,
+    "suggest.enablePreview": true,
     "coc.preferences.hoverTarget": "float",
     "coc.preferences.messageLevel": "more",
+    "coc.preferences.formatOnSaveFiletypes": [],
     "rust.show_hover_context": true,
     "rust.full_docs": true,
+    "rust.racer_completion": true,
     "rust-analyzer.diagnostics.enable": true,
-    "suggest.enablePreview": true,
     "rust-client.revealOutputChannelOn": "info",
     "rust-client.updateOnStartup": true,
-    "rust-client.channel": "stable",
-    "coc.preferences.formatOnSaveFiletypes": ["rust"]
+    "rust-client.channel": "stable"
 }
