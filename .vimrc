@@ -352,8 +352,8 @@ let g:rainbow_load_separately = [
     \ [ '*.{html,htm}' , [['(', ')'], ['\[', '\]'], ['{', '}'], ['<\a[^>]*>', '</[^>]*>']] ],
     \ ]
 
-let g:rainbow_guifgs = ['RoyalBlue3', 'DarkOrange3', 'DarkOrchid3', 'FireBrick']
-let g:rainbow_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'red', 'magenta']
+let g:rainbow_guifgs = ['DarkGoldenrod1', 'MediumOrchid1', 'DodgerBlue1', 'FireBrick1' ]
+let g:rainbow_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'blue', 'magenta']
 
 let NERDTreeShowHidden = 1
 let NERDTreeMinimalUI = 1
