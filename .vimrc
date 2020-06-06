@@ -19,7 +19,7 @@ set tabstop=4 softtabstop=4
 set shiftwidth=4
 set expandtab
 set smartindent
-set guifont=Hack\ Nerd\ Font\ 12
+set guifont=Hack\ Nerd\ Font\ Mono\ 12
 
 " keep visual mode when indenting
 " use shift+< or shift+>
@@ -120,9 +120,11 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'ThePrimeagen/vim-be-good'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 " VIM theme
-Plug 'rakr/vim-one'
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'patstockwell/vim-monokai-tasty'
-" Plug 'arzg/vim-rust-syntax-ext'
+Plug 'arzg/vim-rust-syntax-ext'
+
+Plug 'mhinz/vim-signify'
 " Airline Stuff
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -176,7 +178,7 @@ Plug 'junegunn/fzf.vim'
 map <leader><BS> :Files<CR>
 " find text
 Plug 'easymotion/vim-easymotion'
-" activate = <leader>ff
+" activate = s
 " search forward = /
 " search backward = ?
 " search current visible = g/
@@ -352,7 +354,7 @@ let g:rainbow_load_separately = [
     \ [ '*.{html,htm}' , [['(', ')'], ['\[', '\]'], ['{', '}'], ['<\a[^>]*>', '</[^>]*>']] ],
     \ ]
 
-let g:rainbow_guifgs = ['DarkGoldenrod1', 'MediumOrchid1', 'DodgerBlue1', 'FireBrick1' ]
+let g:rainbow_guifgs = ['Gold1', 'MediumOrchid1', 'FireBrick3', 'DodgerBlue1' ]
 let g:rainbow_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'blue', 'magenta']
 
 let NERDTreeShowHidden = 1
@@ -445,28 +447,86 @@ if (empty($TMUX))
 endif
 
 set background=dark
-" colorscheme xcodedark
-" colorscheme vim-monokai-tasty
-colorscheme one
-set termguicolors
+colorscheme vim-monokai-tasty
+
 set t_8b=^[[48;2;%lu;%lu;%lum
 set t_8f=^[[38;2;%lu;%lu;%lum
 
+" CUSTOM VIM COLORS
+" hi Search guifg=#bada55 guibg=#000000 gui=bold ctermfg=green ctermbg=black cterm=bold
+" hot key for what color is this
+nmap <leader>wc :echo synIDattr(synID(line('.'), col('.'), 1), 'name')<CR>
+
+hi NERDTreeGitStatusModified guifg=#66D9EF guibg=#000000 gui=bold ctermfg=green ctermbg=black cterm=bold
+hi NERDTreeGitStatusIgnored guifg=#F92672 guibg=#000000 gui=bold ctermfg=green ctermbg=black cterm=bold
+hi NERDTreeGitStatusDirDirty guifg=#66D9EF guibg=#000000 gui=bold ctermfg=green ctermbg=black cterm=bold
+hi NERDTreeGitStatusUntracked guifg=#8aff80 guibg=#000000 gui=bold ctermfg=green ctermbg=black cterm=bold
+
+hi rustModPath ctermfg=white
+hi rustIdentifier ctermfg=white
+hi rustTypedef guifg=#62D8F1
+hi rustType guifg=#62D8F1
+hi rustMacro guifg=#62D8F1
+hi rustDerive guifg=#FFFFFF
+hi rustAttribute guifg=#FFFFFF
+hi rustEnum guifg=#62D8F1
+hi rustTrait guifg=#FC1A70
+hi rustStructure guifg=#62D8F1
+hi rustStructure guifg=#62D8F1
+hi rustFuncCall guifg=#8aff80
+hi rustFuncName guifg=#A4E400
+hi rustKeyword guifg=#B70444
+hi rustAsync guifg=#B70444
+hi rustRepeat guifg=#FC1A70
+hi rustConditional guifg=#ff80bf
+hi rustSelf guifg=#FF9700
+hi rustString guifg=#ff7ab2
+hi rustStringDelimiter guifg=#d9c97c
+hi rustStorage guifg=#ff9580
+hi rustCommentLine guifg=#bebebe
+
+" vim-rust-syntax-ext
+hi rsFuncDef guifg=#8aff80
+hi rsUserMacro guifg=#8aff80
+hi rsUserType guifg=#FFFFFF
+hi rsUserIdent guifg=#FFFFFF
+hi rsUserFunc guifg=#8aff80
+hi rsUserMethod guifg=#8aff80
+hi rsLibraryType guifg=#66D9EF
+hi rsLibraryMacro guifg=#66D9EF
+hi rsFieldAccess guifg=#66D9EF
+hi rsAttribute guifg=#B70444
+
+hi op_lv0 guifg=#FC1A70
+hi op_lv1 guifg=#66D9EF
+hi op_lv2 guifg=#B70444
+hi op_lv5 guifg=#8aff80
+hi op_lv6 guifg=#8aff80
+hi op_lv7 guifg=#8aff80
+hi op_lv8 guifg=#8aff80
+
+hi SignifySignAdd    ctermfg=lightgreen  guifg=#8aff80 cterm=NONE gui=NONE
+hi SignifySignDelete ctermfg=magenta guifg=#F92672 cterm=NONE gui=NONE
+hi SignifySignChange ctermfg=lightblue guifg=#66D9EF cterm=NONE gui=NONE
+
 let g:lightline = {
-      \ 'colorscheme': 'one',
+      \ 'colorscheme': 'dracula',
       \ }
-let g:promptline_theme = 'one'
-let g:airline_theme='one'
+let g:promptline_theme = 'dracula'
+let g:airline_theme='dracula'
 let g:airline_powerline_fonts = 1
+
 
 let g:signify_sign_add    = '┃'
 let g:signify_sign_change = '┃'
 let g:signify_sign_delete = '•'
 
-let g:signify_sign_show_count = 0 " Don’t show the number of deleted lines.
-let g:green_comments = 0
-let g:dim_punctuation = 1
-
+let g:signify_sign_show_count = 0 " Don’t show the number of deleted lines
+set updatetime=100
+" Update Git signs every time the text is changed
+autocmd User SignifySetup
+            \ execute 'autocmd! signify' |
+            \ autocmd signify TextChanged,TextChangedI * call sy#start()
 "==============================================================================
 " NON-Plugin Commands
 "==============================================================================

@@ -8,7 +8,7 @@
     "rust.full_docs": true,
     "rust.racer_completion": true,
     "rust-analyzer.diagnostics.enable": true,
-    "rust-client.revealOutputChannelOn": "info",
+    "rust-client.revealOutputChannelOn": "never",
     "rust-client.updateOnStartup": true,
     "rust-client.channel": "stable"
 }
