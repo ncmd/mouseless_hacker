@@ -120,7 +120,9 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'ThePrimeagen/vim-be-good'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 " VIM theme
+Plug 'rakr/vim-one'
 Plug 'patstockwell/vim-monokai-tasty'
+" Plug 'arzg/vim-rust-syntax-ext'
 " Airline Stuff
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -338,10 +340,10 @@ call plug#end()
 " Rust Docs
 let g:rust_doc#downloaded_rust_doc_dir = '~/rust-docs/'
 
-set hidden
 let g:racer_cmd = "~/.cargo/bin/racer"
 
 let g:racer_experimental_completer = 1
+let g:racer_insert_paren = 1
 
 let g:rainbow_active = 1
 let g:rainbow_load_separately = [
@@ -429,18 +431,41 @@ let g:EasyMotion_smartcase = 1
 "==============================================================================
 " VIM Activate theme
 "==============================================================================
+if (empty($TMUX))
+  if (has("nvim"))
+  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+endif
+
 set background=dark
-colorscheme vim-monokai-tasty
+" colorscheme xcodedark
+" colorscheme vim-monokai-tasty
+colorscheme one
 set termguicolors
-let &t_8f = "\<Esc>[38;2;%"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+set t_8b=^[[48;2;%lu;%lu;%lum
+set t_8f=^[[38;2;%lu;%lu;%lum
 
 let g:lightline = {
-      \ 'colorscheme': 'monokai_tasty',
+      \ 'colorscheme': 'one',
       \ }
-let g:promptline_theme = 'monokai_tasty'
-let g:airline_theme='monokai_tasty'
+let g:promptline_theme = 'one'
+let g:airline_theme='one'
 let g:airline_powerline_fonts = 1
+
+let g:signify_sign_add    = '┃'
+let g:signify_sign_change = '┃'
+let g:signify_sign_delete = '•'
+
+let g:signify_sign_show_count = 0 " Don’t show the number of deleted lines.
+let g:green_comments = 0
+let g:dim_punctuation = 1
 
 "==============================================================================
 " NON-Plugin Commands
