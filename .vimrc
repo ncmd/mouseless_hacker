@@ -19,7 +19,8 @@ set tabstop=4 softtabstop=4
 set shiftwidth=4
 set expandtab
 set smartindent
-set guifont=Hack\ Nerd\ Font\ Mono\ 12
+set guifont=Fira\ Code\ 12
+" set guifont=Hack\ Nerd\ Font\ Mono\ 12
 
 " keep visual mode when indenting
 " use shift+< or shift+>
@@ -530,13 +531,13 @@ let g:airline_theme='dracula'
 let g:airline_powerline_fonts = 1
 
 
-let g:signify_sign_add = '┃'
+let g:signify_sign_add = '►'
 let g:signify_sign_change = '┃'
-let g:signify_sign_delete = '►'
+let g:signify_sign_delete = '◄'
 let g:signify_sign_show_count = 0 " Don’t show the number of deleted lines
 
 let g:indentLine_setColors = 1
-let g:indentLine_char_list = ['┊','¦','|', '┃', '║', '░','▒','█']
+let g:indentLine_char_list = [':','¦','|', '┃', '║', '░','▒','█']
 let g:indentLine_setConceal = 1
 let g:indentLine_enabled = 1
 
