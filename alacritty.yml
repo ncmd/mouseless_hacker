@@ -2,7 +2,7 @@
 colors:
   # Default colors
   primary:
-    background: '0x282a36'
+    background: '0x272822'
     foreground: '0xf8f8f2'
 
     # Bright and dim foreground colors
@@ -24,23 +24,23 @@ colors:
   # Normal colors
   normal:
     black:   '0x000000'
-    red:     '0xff5555'
-    green:   '0x50fa7b'
+    red:     '0xFA023C'
+    green:   '0xA7ED1A'
     yellow:  '0xf1fa8c'
-    blue:    '0xbd93f9'
+    blue:    '0x5730B3'
     magenta: '0xff79c6'
-    cyan:    '0x8be9fd'
+    cyan:    '0x36CDC4'
     white:   '0xbfbfbf'
 
   # Bright colors
   bright:
     black:   '0x4d4d4d'
-    red:     '0xff6e67'
-    green:   '0x5af78e'
+    red:     '0xFA023C'
+    green:   '0xA7ED1A'
     yellow:  '0xf4f99d'
-    blue:    '0xcaa9fa'
+    blue:    '0x5730B3'
     magenta: '0xff92d0'
-    cyan:    '0x9aedfe'
+    cyan:    '0x36CDC4'
     white:   '0xe6e6e6'
 
   # Dim colors
@@ -49,12 +49,12 @@ colors:
   # on the `normal` colors.
   dim:
     black:   '0x14151b'
-    red:     '0xff2222'
-    green:   '0x1ef956'
+    red:     '0xFA023C'
+    green:   '0xA7ED1A'
     yellow:  '0xebf85b'
-    blue:    '0x4d5b86'
+    blue:    '0x5730B3'
     magenta: '0xff46b0'
-    cyan:    '0x59dffc'
+    cyan:    '0x36CDC4'
     white:   '0xe6e6d1'
 
   # Indexed Colors

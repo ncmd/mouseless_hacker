@@ -462,7 +462,7 @@ nmap <leader>wc :echo synIDattr(synID(line('.'), col('.'), 1), 'name')<CR>
 
 hi NERDTreeDir guifg=#FFFFFF guibg=#000000 gui=bold ctermfg=white ctermbg=NONE cterm=bold
 hi NERDTreeGitStatusModified guifg=#66D9EF guibg=#000000 gui=bold ctermfg=lightblue ctermbg=NONE cterm=bold
-hi NERDTreeGitStatusIgnored guifg=#F92672 guibg=#000000 gui=bold ctermfg=red ctermbg=NONE cterm=bold
+hi NERDTreeGitStatusIgnored guifg=#FA023C guibg=#000000 gui=bold ctermfg=red ctermbg=NONE cterm=bold
 hi NERDTreeGitStatusDirDirty guifg=#66D9EF guibg=#000000 gui=bold ctermfg=green ctermbg=NONE cterm=bold
 hi NERDTreeGitStatusUntracked guifg=#A7ED1A guibg=#000000 gui=bold ctermfg=green ctermbg=NONE cterm=bold
 
@@ -498,24 +498,28 @@ hi rsUserType guifg=#FFFFFF guibg=#000000 ctermfg=white ctermbg=NONE
 hi rsUserIdent guifg=#FFFFFF guibg=#000000 ctermfg=white ctermbg=NONE
 hi rsUserFunc guifg=#A7ED1A guibg=#000000 ctermfg=green ctermbg=NONE
 hi rsUserMethod guifg=#A7ED1A guibg=#000000 ctermfg=green ctermbg=NONE
-hi rsLibraryType guifg=#66D9EF guibg=#000000 ctermfg=lightblue ctermbg=NONE
+hi rsLibraryType guifg=#5730B3 guibg=#000000 ctermfg=lightblue ctermbg=NONE
 hi rsLibraryMacro guifg=#66D9EF guibg=#000000 ctermfg=lightblue ctermbg=NONE
 hi rsFieldAccess guifg=#66D9EF guibg=#000000 ctermfg=lightblue ctermbg=NONE
 hi rsAttribute guifg=#B70444 guibg=#000000 ctermfg=red ctermbg=NONE
 hi rsForeignType guifg=#FFFFFF guibg=#000000 ctermfg=white ctermbg=NONE
 hi rsForeignFunc guifg=#A7ED1A guibg=#000000 ctermfg=green ctermbg=NONE
 
-" hi op_lv0 guifg=#F92672 guibg=NONE ctermfg=magenta ctermbg=NONE
-" hi op_lv1 guifg=#F92672 guibg=NONE ctermfg=magenta ctermbg=NONE
-" hi op_lv2 guifg=#F92672 guibg=NONE ctermfg=magenta ctermbg=NONE
-" hi op_lv3 guifg=#F92672 guibg=NONE ctermfg=magenta ctermbg=NONE
-" hi op_lv4 guifg=#F92672 guibg=NONE ctermfg=green ctermbg=NONE
-" hi op_lv5 guifg=#F92672 guibg=NONE ctermfg=green ctermbg=NONE
-" hi op_lv6 guifg=#F92672 guibg=#000000 ctermfg=green ctermbg=NONE
-" hi op_lv7 guifg=#F92672 guibg=#000000 ctermfg=green ctermbg=NONE
+hi op_lv0 guifg=#FA023C guibg=NONE ctermfg=red ctermbg=NONE
+hi op_lv1 guifg=#FA023C guibg=NONE ctermfg=red ctermbg=NONE
+hi op_lv2 guifg=#FA023C guibg=NONE ctermfg=red ctermbg=NONE
+hi op_lv3 guifg=#FA023C guibg=NONE ctermfg=red ctermbg=NONE
+hi op_lv4 guifg=#FA023C guibg=NONE ctermfg=red ctermbg=NONE
+hi op_lv5 guifg=#FA023C guibg=NONE ctermfg=red ctermbg=NONE
+hi op_lv0 guifg=#FA023C guibg=NONE ctermfg=red ctermbg=NONE
+hi op_lv1 guifg=#FA023C guibg=NONE ctermfg=red ctermbg=NONE
+hi op_lv2 guifg=#FA023C guibg=NONE ctermfg=red ctermbg=NONE
+hi op_lv3 guifg=#FA023C guibg=NONE ctermfg=red ctermbg=NONE
+hi op_lv4 guifg=#FA023C guibg=NONE ctermfg=red ctermbg=NONE
+hi op_lv5 guifg=#FA023C guibg=NONE ctermfg=red ctermbg=NONE
 
 hi SignifySignAdd ctermfg=green guifg=#A7ED1A cterm=NONE gui=NONE
-hi SignifySignDelete ctermfg=red guifg=#F92672 cterm=NONE gui=NONE
+hi SignifySignDelete ctermfg=red guifg=#FA023C cterm=NONE gui=NONE
 hi SignifySignChange ctermfg=lightblue guifg=#66D9EF cterm=NONE gui=NONE
 "
 let g:lightline = {
@@ -526,7 +530,7 @@ let g:airline_theme='dracula'
 let g:airline_powerline_fonts = 1
 
 
-let g:signify_sign_add    = '█'
+let g:signify_sign_add = '┃'
 let g:signify_sign_change = '┃'
 let g:signify_sign_delete = '►'
 let g:signify_sign_show_count = 0 " Don’t show the number of deleted lines
@@ -563,6 +567,9 @@ set updatetime=100
 autocmd User SignifySetup
             \ execute 'autocmd! signify' |
             \ autocmd signify TextChanged,TextChangedI * call sy#start()
+
+hi Normal ctermbg=NONE ctermfg=NONE guifg=NONE guibg=NONE
+
 "==============================================================================
 " NON-Plugin Commands
 "==============================================================================
