@@ -457,13 +457,14 @@ set t_8f=^[[38;2;%lu;%lu;%lum
 " hot key for what color is this
 nmap <leader>wc :echo synIDattr(synID(line('.'), col('.'), 1), 'name')<CR>
 
-hi NERDTreeGitStatusModified guifg=#66D9EF guibg=#000000 gui=bold ctermfg=green ctermbg=black cterm=bold
-hi NERDTreeGitStatusIgnored guifg=#F92672 guibg=#000000 gui=bold ctermfg=green ctermbg=black cterm=bold
-hi NERDTreeGitStatusDirDirty guifg=#66D9EF guibg=#000000 gui=bold ctermfg=green ctermbg=black cterm=bold
-hi NERDTreeGitStatusUntracked guifg=#8aff80 guibg=#000000 gui=bold ctermfg=green ctermbg=black cterm=bold
+hi NERDTreeDir guifg=#FFFFFF guibg=#000000 gui=bold ctermfg=white ctermbg=NONE cterm=bold
+hi NERDTreeGitStatusModified guifg=#66D9EF guibg=#000000 gui=bold ctermfg=blue ctermbg=NONE cterm=bold
+hi NERDTreeGitStatusIgnored guifg=#F92672 guibg=#000000 gui=bold ctermfg=red ctermbg=NONE cterm=bold
+hi NERDTreeGitStatusDirDirty guifg=#66D9EF guibg=#000000 gui=bold ctermfg=green ctermbg=NONE cterm=bold
+hi NERDTreeGitStatusUntracked guifg=#8aff80 guibg=#000000 gui=bold ctermfg=green ctermbg=NONE cterm=bold
 
-hi rustModPath ctermfg=white
-hi rustIdentifier ctermfg=white
+" hi rustModPath ctermfg=white
+" hi rustIdentifier ctermfg=white
 hi rustTypedef guifg=#62D8F1
 hi rustType guifg=#62D8F1
 hi rustMacro guifg=#62D8F1
@@ -471,7 +472,6 @@ hi rustDerive guifg=#FFFFFF
 hi rustAttribute guifg=#FFFFFF
 hi rustEnum guifg=#62D8F1
 hi rustTrait guifg=#FC1A70
-hi rustStructure guifg=#62D8F1
 hi rustStructure guifg=#62D8F1
 hi rustFuncCall guifg=#8aff80
 hi rustFuncName guifg=#A4E400
@@ -486,29 +486,31 @@ hi rustStorage guifg=#ff9580
 hi rustCommentLine guifg=#bebebe
 
 " vim-rust-syntax-ext
-hi rsFuncDef guifg=#8aff80
-hi rsUserMacro guifg=#8aff80
-hi rsUserType guifg=#FFFFFF
-hi rsUserIdent guifg=#FFFFFF
-hi rsUserFunc guifg=#8aff80
-hi rsUserMethod guifg=#8aff80
-hi rsLibraryType guifg=#66D9EF
-hi rsLibraryMacro guifg=#66D9EF
-hi rsFieldAccess guifg=#66D9EF
-hi rsAttribute guifg=#B70444
+hi rsFuncDef guifg=#8aff80 guibg=#000000 ctermfg=green ctermbg=NONE
+hi rsUserMacro guifg=#8aff80 guibg=#000000 ctermfg=lightblue ctermbg=NONE
+hi rsUserType guifg=#FFFFFF guibg=#000000 ctermfg=white ctermbg=NONE
+hi rsUserIdent guifg=#FFFFFF guibg=#000000 ctermfg=white ctermbg=NONE
+hi rsUserFunc guifg=#8aff80 guibg=#000000 ctermfg=green ctermbg=NONE
+hi rsUserMethod guifg=#8aff80 guibg=#000000 ctermfg=green ctermbg=NONE
+hi rsLibraryType guifg=#66D9EF guibg=#000000 ctermfg=blue ctermbg=NONE
+hi rsLibraryMacro guifg=#66D9EF guibg=#000000 ctermfg=blue ctermbg=NONE
+hi rsFieldAccess guifg=#66D9EF guibg=#000000 ctermfg=lightblue ctermbg=NONE
+hi rsAttribute guifg=#B70444 guibg=#000000 ctermfg=red ctermbg=NONE
+hi rsForeignType guifg=#FFFFFF guibg=#000000 ctermfg=white ctermbg=NONE
+hi rsForeignFunc guifg=#8aff80 guibg=#000000 ctermfg=lightgreen ctermbg=NONE
 
-hi op_lv0 guifg=#FC1A70
-hi op_lv1 guifg=#66D9EF
-hi op_lv2 guifg=#B70444
-hi op_lv5 guifg=#8aff80
-hi op_lv6 guifg=#8aff80
-hi op_lv7 guifg=#8aff80
-hi op_lv8 guifg=#8aff80
+hi op_lv0 guifg=#F92672 guibg=#000000 ctermfg=red ctermbg=NONE
+hi op_lv1 guifg=#66D9EF guibg=#000000 ctermfg=lightblue ctermbg=NONE
+hi op_lv2 guifg=#B70444 guibg=#000000 ctermfg=red ctermbg=NONE
+hi op_lv5 guifg=#8aff80 guibg=#000000 ctermfg=lightgreen ctermbg=NONE
+hi op_lv6 guifg=#8aff80 guibg=#000000 ctermfg=lightgreen ctermbg=NONE
+hi op_lv7 guifg=#8aff80 guibg=#000000 ctermfg=lightgreen ctermbg=NONE
+hi op_lv8 guifg=#8aff80 guibg=#000000 ctermfg=lightgreen ctermbg=NONE
 
-hi SignifySignAdd    ctermfg=lightgreen  guifg=#8aff80 cterm=NONE gui=NONE
-hi SignifySignDelete ctermfg=magenta guifg=#F92672 cterm=NONE gui=NONE
+hi SignifySignAdd ctermfg=lightgreen guifg=#8aff80 cterm=NONE gui=NONE
+hi SignifySignDelete ctermfg=red guifg=#F92672 cterm=NONE gui=NONE
 hi SignifySignChange ctermfg=lightblue guifg=#66D9EF cterm=NONE gui=NONE
-
+"
 let g:lightline = {
       \ 'colorscheme': 'dracula',
       \ }
@@ -517,9 +519,9 @@ let g:airline_theme='dracula'
 let g:airline_powerline_fonts = 1
 
 
-let g:signify_sign_add    = '┃'
+let g:signify_sign_add    = '█'
 let g:signify_sign_change = '┃'
-let g:signify_sign_delete = '•'
+let g:signify_sign_delete = '►'
 
 let g:signify_sign_show_count = 0 " Don’t show the number of deleted lines
 set updatetime=100
