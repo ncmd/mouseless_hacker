@@ -188,13 +188,13 @@ map s <Plug>(easymotion-overwin-f)
 map sr <Plug>(easymotion-repeat)
 map /// :let @/ = ""<CR>
 Plug 'haya14busa/incsearch.vim'
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
+map f/  <Plug>(incsearch-forward)
+map f?  <Plug>(incsearch-backward)
+map fg/ <Plug>(incsearch-stay)
 Plug 'haya14busa/incsearch-fuzzy.vim'
-map f/ <Plug>(incsearch-fuzzy-/)
-map f? <Plug>(incsearch-fuzzy-?)
-map fg/ <Plug>(incsearch-fuzzy-stay)
+map / <Plug>(incsearch-fuzzy-/)
+map ? <Plug>(incsearch-fuzzy-?)
+map g/ <Plug>(incsearch-fuzzy-stay)
 Plug 'haya14busa/incsearch-easymotion.vim'
 map z/ <Plug>(incsearch-easymotion-/)
 map z? <Plug>(incsearch-easymotion-?)
@@ -229,6 +229,9 @@ Plug 'godlygeek/tabular'
 
 " Matching Parentesis
 Plug 'frazrepo/vim-rainbow'
+" Matching Indent
+Plug 'yggdroot/indentline'
+Plug 'Yggdroot/hiPairs'
 
 " Edit Surroundings
 " highlight word in visual mode -> shift+S -> {char} = {char}word{char}
@@ -345,7 +348,7 @@ let g:rust_doc#downloaded_rust_doc_dir = '~/rust-docs/'
 let g:racer_cmd = "~/.cargo/bin/racer"
 
 let g:racer_experimental_completer = 1
-let g:racer_insert_paren = 1
+let g:racer_insert_paren = 0
 
 let g:rainbow_active = 1
 let g:rainbow_load_separately = [
@@ -355,7 +358,7 @@ let g:rainbow_load_separately = [
     \ ]
 
 let g:rainbow_guifgs = ['Gold1', 'MediumOrchid1', 'FireBrick3', 'DodgerBlue1' ]
-let g:rainbow_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'blue', 'magenta']
+let g:rainbow_ctermfgs = ['lightblue', 'green', 'yellow', 'red']
 
 let NERDTreeShowHidden = 1
 let NERDTreeMinimalUI = 1
@@ -458,56 +461,60 @@ set t_8f=^[[38;2;%lu;%lu;%lum
 nmap <leader>wc :echo synIDattr(synID(line('.'), col('.'), 1), 'name')<CR>
 
 hi NERDTreeDir guifg=#FFFFFF guibg=#000000 gui=bold ctermfg=white ctermbg=NONE cterm=bold
-hi NERDTreeGitStatusModified guifg=#66D9EF guibg=#000000 gui=bold ctermfg=blue ctermbg=NONE cterm=bold
+hi NERDTreeGitStatusModified guifg=#66D9EF guibg=#000000 gui=bold ctermfg=lightblue ctermbg=NONE cterm=bold
 hi NERDTreeGitStatusIgnored guifg=#F92672 guibg=#000000 gui=bold ctermfg=red ctermbg=NONE cterm=bold
 hi NERDTreeGitStatusDirDirty guifg=#66D9EF guibg=#000000 gui=bold ctermfg=green ctermbg=NONE cterm=bold
-hi NERDTreeGitStatusUntracked guifg=#8aff80 guibg=#000000 gui=bold ctermfg=green ctermbg=NONE cterm=bold
+hi NERDTreeGitStatusUntracked guifg=#A7ED1A guibg=#000000 gui=bold ctermfg=green ctermbg=NONE cterm=bold
 
+" not usind vim-rust-syntax-ext
 " hi rustModPath ctermfg=white
 " hi rustIdentifier ctermfg=white
-hi rustTypedef guifg=#62D8F1
-hi rustType guifg=#62D8F1
-hi rustMacro guifg=#62D8F1
-hi rustDerive guifg=#FFFFFF
-hi rustAttribute guifg=#FFFFFF
-hi rustEnum guifg=#62D8F1
-hi rustTrait guifg=#FC1A70
-hi rustStructure guifg=#62D8F1
-hi rustFuncCall guifg=#8aff80
-hi rustFuncName guifg=#A4E400
-hi rustKeyword guifg=#B70444
-hi rustAsync guifg=#B70444
-hi rustRepeat guifg=#FC1A70
-hi rustConditional guifg=#ff80bf
-hi rustSelf guifg=#FF9700
-hi rustString guifg=#ff7ab2
-hi rustStringDelimiter guifg=#d9c97c
-hi rustStorage guifg=#ff9580
-hi rustCommentLine guifg=#bebebe
+" hi rustTypedef guifg=#62D8F1
+" hi rustType guifg=#62D8F1
+" hi rustMacro guifg=#62D8F1
+" hi rustDerive guifg=#FFFFFF
+" hi rustAttribute guifg=#FFFFFF
+" hi rustEnum guifg=#62D8F1
+" hi rustTrait guifg=#FC1A70
+" hi rustStructure guifg=#62D8F1
+" hi rustFuncCall guifg=#A7ED1A
+" hi rustFuncName guifg=#A4E400
+" hi rustKeyword guifg=#B70444
+" hi rustAsync guifg=#B70444
+" hi rustRepeat guifg=#FC1A70
+" hi rustConditional guifg=#ff80bf
+" hi rustSelf guifg=#FF9700
+" hi rustString guifg=#ff7ab2
+" hi rustStringDelimiter guifg=#d9c97c
+" hi rustStorage guifg=#ff9580
+" hi rustCommentLine guifg=#bebebe
 
 " vim-rust-syntax-ext
-hi rsFuncDef guifg=#8aff80 guibg=#000000 ctermfg=green ctermbg=NONE
-hi rsUserMacro guifg=#8aff80 guibg=#000000 ctermfg=lightblue ctermbg=NONE
+hi rsModule guifg=#FFFFFF guibg=#000000 ctermfg=white ctermbg=NONE
+hi rsFuncDef guifg=#A7ED1A guibg=#000000 ctermfg=green ctermbg=NONE
+hi rsIdentDef guifg=#FFFFFF guibg=#000000 ctermfg=white ctermbg=NONE
+hi rsUserMacro guifg=#A7ED1A guibg=#000000 ctermfg=lightblue ctermbg=NONE
 hi rsUserType guifg=#FFFFFF guibg=#000000 ctermfg=white ctermbg=NONE
 hi rsUserIdent guifg=#FFFFFF guibg=#000000 ctermfg=white ctermbg=NONE
-hi rsUserFunc guifg=#8aff80 guibg=#000000 ctermfg=green ctermbg=NONE
-hi rsUserMethod guifg=#8aff80 guibg=#000000 ctermfg=green ctermbg=NONE
-hi rsLibraryType guifg=#66D9EF guibg=#000000 ctermfg=blue ctermbg=NONE
-hi rsLibraryMacro guifg=#66D9EF guibg=#000000 ctermfg=blue ctermbg=NONE
+hi rsUserFunc guifg=#A7ED1A guibg=#000000 ctermfg=green ctermbg=NONE
+hi rsUserMethod guifg=#A7ED1A guibg=#000000 ctermfg=green ctermbg=NONE
+hi rsLibraryType guifg=#66D9EF guibg=#000000 ctermfg=lightblue ctermbg=NONE
+hi rsLibraryMacro guifg=#66D9EF guibg=#000000 ctermfg=lightblue ctermbg=NONE
 hi rsFieldAccess guifg=#66D9EF guibg=#000000 ctermfg=lightblue ctermbg=NONE
 hi rsAttribute guifg=#B70444 guibg=#000000 ctermfg=red ctermbg=NONE
 hi rsForeignType guifg=#FFFFFF guibg=#000000 ctermfg=white ctermbg=NONE
-hi rsForeignFunc guifg=#8aff80 guibg=#000000 ctermfg=lightgreen ctermbg=NONE
+hi rsForeignFunc guifg=#A7ED1A guibg=#000000 ctermfg=green ctermbg=NONE
 
-hi op_lv0 guifg=#F92672 guibg=#000000 ctermfg=red ctermbg=NONE
-hi op_lv1 guifg=#66D9EF guibg=#000000 ctermfg=lightblue ctermbg=NONE
-hi op_lv2 guifg=#B70444 guibg=#000000 ctermfg=red ctermbg=NONE
-hi op_lv5 guifg=#8aff80 guibg=#000000 ctermfg=lightgreen ctermbg=NONE
-hi op_lv6 guifg=#8aff80 guibg=#000000 ctermfg=lightgreen ctermbg=NONE
-hi op_lv7 guifg=#8aff80 guibg=#000000 ctermfg=lightgreen ctermbg=NONE
-hi op_lv8 guifg=#8aff80 guibg=#000000 ctermfg=lightgreen ctermbg=NONE
+" hi op_lv0 guifg=#F92672 guibg=NONE ctermfg=magenta ctermbg=NONE
+" hi op_lv1 guifg=#F92672 guibg=NONE ctermfg=magenta ctermbg=NONE
+" hi op_lv2 guifg=#F92672 guibg=NONE ctermfg=magenta ctermbg=NONE
+" hi op_lv3 guifg=#F92672 guibg=NONE ctermfg=magenta ctermbg=NONE
+" hi op_lv4 guifg=#F92672 guibg=NONE ctermfg=green ctermbg=NONE
+" hi op_lv5 guifg=#F92672 guibg=NONE ctermfg=green ctermbg=NONE
+" hi op_lv6 guifg=#F92672 guibg=#000000 ctermfg=green ctermbg=NONE
+" hi op_lv7 guifg=#F92672 guibg=#000000 ctermfg=green ctermbg=NONE
 
-hi SignifySignAdd ctermfg=lightgreen guifg=#8aff80 cterm=NONE gui=NONE
+hi SignifySignAdd ctermfg=green guifg=#A7ED1A cterm=NONE gui=NONE
 hi SignifySignDelete ctermfg=red guifg=#F92672 cterm=NONE gui=NONE
 hi SignifySignChange ctermfg=lightblue guifg=#66D9EF cterm=NONE gui=NONE
 "
@@ -522,8 +529,35 @@ let g:airline_powerline_fonts = 1
 let g:signify_sign_add    = '█'
 let g:signify_sign_change = '┃'
 let g:signify_sign_delete = '►'
-
 let g:signify_sign_show_count = 0 " Don’t show the number of deleted lines
+
+let g:indentLine_setColors = 1
+let g:indentLine_char_list = ['┊','¦','|', '┃', '║', '░','▒','█']
+let g:indentLine_setConceal = 1
+let g:indentLine_enabled = 1
+
+let g:hiPairs_enable_matchParen = 1
+let g:hiPairs_timeout = 1
+let g:hiPairs_insert_timeout = 1
+let g:hiPairs_stopline_more = 100
+let g:hiPairs_hl_matchPair = { 'term'    : 'underline,bold',
+            \                  'cterm'   : 'bold',
+            \                  'ctermfg' : '0',
+            \                  'ctermbg' : 'lightgreen',
+            \                  'gui'     : 'bold',
+            \                  'guifg'   : 'Black',
+            \                  'guibg'   : '#A7ED1A' }
+
+let g:hiPairs_hl_unmatchPair = { 'term'    : 'underline,italic',
+            \                    'cterm'   : 'italic',
+            \                    'ctermfg' : '15',
+            \                    'ctermbg' : '12',
+            \                    'gui'     : 'italic',
+            \                    'guifg'   : 'White',
+            \                    'guibg'   : 'Red' }
+
+" autocmd InsertEnter *
+" autocmd InsertLeave *
 set updatetime=100
 " Update Git signs every time the text is changed
 autocmd User SignifySetup

@@ -1,31 +1,3 @@
-_gen_fzf_default_opts() {
-
-local color00='#2a3b4d'
-local color01='#3d566f'
-local color02='#4b6988'
-local color03='#55799c'
-local color04='#7e90a3'
-local color05='#9fa2a6'
-local color06='#d6d7d9'
-local color07='#ffffff'
-local color08='#c4676c'
-local color09='#ff9966'
-local color0A='#ffff66'
-local color0B='#66ff66'
-local color0C='#4b8f77'
-local color0D='#15f4ee'
-local color0E='#9c6cd3'
-local color0F='#bb64a9'
-
-export FZF_DEFAULT_OPTS="
-  --color=bg+:$color01,bg:$color00,spinner:$color0C,hl:$color0D
-  --color=fg:$color04,header:$color0D,info:$color0A,pointer:$color0C
-  --color=marker:$color0C,fg+:$color06,prompt:$color0A,hl+:$color0D
-"
-
-}
-
-_gen_fzf_default_opts
 eval "$(zoxide init zsh)"
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export PIER_CONFIG_PATH="/Users/charleschong/pier.toml"
@@ -66,6 +38,7 @@ alias drx="cd /Users/charleschong/.config/karabiner/assets/complex_modifications
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="robbyrussell"
+# ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -170,3 +143,6 @@ if [ -f '/Users/charleschong/Downloads/google-cloud-sdk/completion.zsh.inc' ]; t
 export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
