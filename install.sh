@@ -15,6 +15,7 @@ echo ${machine}
 if [ ${machine} == "Mac"]; then
     # === HOMEBREW ===
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    brew install cmake
 
     # === KARABINER ===
     # non-us backslash = backslash
@@ -37,8 +38,8 @@ if [ ${machine} == "Mac"]; then
     pip install pynvim
     pip3 install pynvim
     npm install -g neovim
-    nvim -c ":PlugInstall"
-    nvim -c ":source ~/.vimrc"
+    nvim -E -c ":PlugInstall" -c qa!
+    nvim -E -c ":source ~/.vimrc" -c qa!
 
     # === RUST ===
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -84,4 +85,12 @@ if [ ${machine} == "Mac"]; then
     # mouse sensitivity
     cp ./.GlobalPreferences.plist ~/Library/Preferences/.GlobalPreferences.plist
 
+    # === GIT PROJECTS ===
+    mkdir -p ~/go/src/securethebox_rs/
+    cd ~/go/src/securethebox_rs/
+    git clone https://github.com/cavalrytactics/securethebox_client_rs
+    git clone https://github.com/cavalrytactics/securethebox_server_rs
+    
+    # === BROWSER ===
+    # Extensions: GoogleAdOptOut, DarkReader,Vimium,UblockOrigin
 fi

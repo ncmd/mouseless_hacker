@@ -565,9 +565,9 @@ let g:indentLine_enabled = 1
 " autocmd InsertLeave *
 set updatetime=100
 " Update Git signs every time the text is changed
-autocmd User SignifySetup
-            \ execute 'autocmd! signify' |
-            \ autocmd signify TextChanged,TextChangedI * call sy#start()
+" autocmd User SignifySetup
+"             \ execute 'autocmd! signify' |
+"             \ autocmd signify TextChanged,TextChangedI * call sy#start()
 
 hi Normal ctermbg=NONE ctermfg=NONE guifg=NONE guibg=NONE
 
