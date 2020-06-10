@@ -18,20 +18,28 @@ if [ ${machine} == "Mac" ]; then
 
     # === HOMEBREW ===
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    sudo chown $(whoami) /usr/local/Homebrew
+    sudo chown $(whoami) /usr/local/Cellar
+    sudo chown $(whoami) /usr/local/Caskroom
     brew install cmake
+    brew reinstall cmake
 
     # === KARABINER ===
     # non-us backslash = backslash
     # right_command = right control
     brew cask install karabiner-elements
+    brew cask reinstall karabiner-elements
     cp ./karabiner_complex_modifications_kinesis.json ~/.config/karabiner/assets/complex_modifications/mods.json
 
     # === NEOVIM ===
     # VIM Plugin Manager
     brew install neovim
+    brew reinstall neovim
     brew install python3
+    brew reinstall python3
     brew tap homebrew/cask-fonts
     brew cask install font-fira-code
+    brew cask reinstall font-fira-code
     cp ./.vimrc ~/.config/nvim/init.vim
     cp ./coc-settings.json ~/.config/nvim/coc-settings.json
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
@@ -53,14 +61,17 @@ if [ ${machine} == "Mac" ]; then
     cargo install pier
     brew tap federico-terzi/espanso
     brew install espanso
+    brew reinstall espanso
     cp -r ./espanso ~/Library/Preferences/espanso
 
     # === FZF ===
     brew install fzf
+    brew reinstall fzf
     $(brew --prefix)/opt/fzf/install
 
     # === TMUX ===
     brew install tmux
+    brew reinstall tmux
     sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     cp ./.tmux.conf ~/.tmux.conf
     cp ./.tmux.conf.local ~/.tmux.conf.local
@@ -68,11 +79,13 @@ if [ ${machine} == "Mac" ]; then
 
     # === ITERM2 ===
     brew cask install iterm2
+    brew cask reinstall iterm2
     mkdir ~/iterm2
     cp ./iterm2.plist ~/iterm2/iterm2.plist
 
     # === AMETHYST ===
     brew cask install amethyst
+    brew cask reinstall amethyst
     cp ./com.amethyst.Amethyst.plist ~/Library/Preferences/com.amethyst.Amethyst.plist
 
     # === ZSH ===
@@ -102,4 +115,5 @@ if [ ${machine} == "Mac" ]; then
     
     # === GOOGLE CLOUD SDK ===
     brew cask install google-cloud-sdk
+    brew cask reinstall google-cloud-sdk
 fi
