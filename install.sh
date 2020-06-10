@@ -21,6 +21,8 @@ if [ ${machine} == "Mac" ]; then
     sudo chown $(whoami) /usr/local/Homebrew
     sudo chown $(whoami) /usr/local/Cellar
     sudo chown $(whoami) /usr/local/Caskroom
+    sudo chown $(whoami) /usr/local/share/
+    sudo chown $(whoami) /usr/local/share/*
     brew install cmake
     brew reinstall cmake
 
@@ -46,8 +48,8 @@ if [ ${machine} == "Mac" ]; then
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-    pip install pynvim
-    pip3 install pynvim
+    pip install --user pynvim
+    pip3 install --user pynvim
     npm install -g neovim
     nvim -E -c ":PlugInstall" -c qa!
     nvim -E -c ":source ~/.vimrc" -c qa!
