@@ -26,6 +26,7 @@ if [ ${machine} == "Mac" ]; then
     sudo chown $(whoami) /usr/local/lib
     sudo chown $(whoami) /usr/local/lib/*
     brew install cmake
+    brew upgrade cmake
     brew reinstall cmake
 
     # === KARABINER ===
@@ -33,6 +34,7 @@ if [ ${machine} == "Mac" ]; then
     # right_command = right control
     brew cask install karabiner-elements
     brew cask reinstall karabiner-elements
+    mkdir -p ~/.config/karabiner/assets/complex_modifications/
     cp ./karabiner_complex_modifications_kinesis.json ~/.config/karabiner/assets/complex_modifications/mods.json
 
     # === NEOVIM ===
@@ -44,6 +46,7 @@ if [ ${machine} == "Mac" ]; then
     brew tap homebrew/cask-fonts
     brew cask install font-fira-code
     brew cask reinstall font-fira-code
+    mkdir -p~/.config/nvim/
     cp ./.vimrc ~/.config/nvim/init.vim
     cp ./coc-settings.json ~/.config/nvim/coc-settings.json
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
@@ -66,6 +69,7 @@ if [ ${machine} == "Mac" ]; then
     brew tap federico-terzi/espanso
     brew install espanso
     brew reinstall espanso
+    mkdir -p ~/Library/Preferences/espanso
     cp -r ./espanso ~/Library/Preferences/espanso
 
     # === FZF ===
@@ -84,7 +88,7 @@ if [ ${machine} == "Mac" ]; then
     # === ITERM2 ===
     brew cask install iterm2
     brew cask reinstall iterm2
-    mkdir ~/iterm2
+    mkdir -p ~/iterm2
     cp ./iterm2.plist ~/iterm2/iterm2.plist
 
     # === AMETHYST ===
