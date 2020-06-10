@@ -1,18 +1,18 @@
 eval "$(zoxide init zsh)"
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-export PIER_CONFIG_PATH="/Users/charleschong/pier.toml"
+export PIER_CONFIG_PATH="~/pier.toml"
 export EDITOR="/usr/local/bin/nvim"
 alias vim="nvim"
-alias s="cd /Users/charleschong/go/src/securethebox_rs && nvim -S"
+alias s="cd ~/go/src/securethebox_rs && nvim -S"
 alias g="git"
 alias p="python3"
 alias c="git add . && git commit -m 'quick deploy' && git push"
 alias v="vim ~/.zshrc && s"
-alias s="source /Users/charleschong/.zshrc"
-alias ddd="cd /Users/charleschong/go/src/securethebox_rs"
-alias drs="cd /Users/charleschong/go/src/securethebox_rs/securethebox_server_rs"
-alias drc="cd /Users/charleschong/go/src/securethebox_rs/securethebox_client_rs"
-alias mmm="cd /Users/charleschong/go/src/mouseless_hacker && bash ./update.sh"
+alias s="source ~/.zshrc"
+alias ddd="cd ~/go/src/securethebox_rs"
+alias drs="cd ~/go/src/securethebox_rs/securethebox_server_rs"
+alias drc="cd ~/go/src/securethebox_rs/securethebox_client_rs"
+alias mmm="cd ~/go/src/mouseless_hacker && bash ./update.sh"
 alias cb="cargo build"
 alias cbr="cargo build --release"
 alias cr="cargo run"
@@ -30,8 +30,8 @@ alias pg="pier list | grep "
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH="$PATH:`yarn global bin`"
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/charleschong/.oh-my-zsh"
-alias drx="cd /Users/charleschong/.config/karabiner/assets/complex_modifications"
+export ZSH="~/.oh-my-zsh"
+alias drx="cd ~/.config/karabiner/assets/complex_modifications"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -132,17 +132,8 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/charleschong/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/charleschong/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/charleschong/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/charleschong/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-
 # added by travis gem
-[ -f /Users/charleschong/.travis/travis.sh ] && source /Users/charleschong/.travis/travis.sh
+[ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

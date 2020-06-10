@@ -12,7 +12,10 @@ case "${unameOut}" in
     *)          machine="UNKNOWN:${unameOut}"
 esac
 echo ${machine}
-if [ ${machine} == "Mac"]; then
+if [ ${machine} == "Mac" ]; then
+    # === XCODE === 
+    xcode-select --install
+
     # === HOMEBREW ===
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     brew install cmake
@@ -20,7 +23,7 @@ if [ ${machine} == "Mac"]; then
     # === KARABINER ===
     # non-us backslash = backslash
     # right_command = right control
-    brew install karabiner-elements
+    brew cask install karabiner-elements
     cp ./karabiner_complex_modifications_kinesis.json ~/.config/karabiner/assets/complex_modifications/mods.json
 
     # === NEOVIM ===
@@ -64,12 +67,12 @@ if [ ${machine} == "Mac"]; then
     tmux source-file ~/.tmux.conf
 
     # === ITERM2 ===
-    brew install iterm2
+    brew cask install iterm2
     mkdir ~/iterm2
     cp ./iterm2.plist ~/iterm2/iterm2.plist
 
     # === AMETHYST ===
-    brew install amethyst
+    brew cask install amethyst
     cp ./com.amethyst.Amethyst.plist ~/Library/Preferences/com.amethyst.Amethyst.plist
 
     # === ZSH ===
@@ -83,14 +86,20 @@ if [ ${machine} == "Mac"]; then
     # create application shortcuts
     # key repeat set to max
     # mouse sensitivity
+    # gestures
     cp ./.GlobalPreferences.plist ~/Library/Preferences/.GlobalPreferences.plist
 
     # === GIT PROJECTS ===
+    git config --global user.name "Charles"
     mkdir -p ~/go/src/securethebox_rs/
     cd ~/go/src/securethebox_rs/
     git clone https://github.com/cavalrytactics/securethebox_client_rs
     git clone https://github.com/cavalrytactics/securethebox_server_rs
+    brew install travis
     
     # === BROWSER ===
     # Extensions: GoogleAdOptOut, DarkReader,Vimium,UblockOrigin
+    
+    # === GOOGLE CLOUD SDK ===
+    brew cask install google-cloud-sdk
 fi
