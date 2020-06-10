@@ -20,7 +20,6 @@ set shiftwidth=4
 set expandtab
 set smartindent
 set guifont=Fira\ Code\ 12
-" set guifont=Hack\ Nerd\ Font\ Mono\ 12
 
 " keep visual mode when indenting
 " use shift+< or shift+>
@@ -467,7 +466,7 @@ hi NERDTreeGitStatusIgnored guifg=#FA023C guibg=#000000 gui=bold ctermfg=red cte
 hi NERDTreeGitStatusDirDirty guifg=#66D9EF guibg=#000000 gui=bold ctermfg=green ctermbg=NONE cterm=bold
 hi NERDTreeGitStatusUntracked guifg=#A7ED1A guibg=#000000 gui=bold ctermfg=green ctermbg=NONE cterm=bold
 
-" not usind vim-rust-syntax-ext
+" not using vim-rust-syntax-ext
 " hi rustModPath ctermfg=white
 " hi rustIdentifier ctermfg=white
 " hi rustTypedef guifg=#62D8F1
@@ -564,10 +563,6 @@ let g:indentLine_enabled = 1
 " autocmd InsertEnter *
 " autocmd InsertLeave *
 set updatetime=100
-" Update Git signs every time the text is changed
-" autocmd User SignifySetup
-"             \ execute 'autocmd! signify' |
-"             \ autocmd signify TextChanged,TextChangedI * call sy#start()
 
 hi Normal ctermbg=NONE ctermfg=NONE guifg=NONE guibg=NONE
 
