@@ -8,6 +8,7 @@ cat ~/.config/alacritty/alacritty.yml > ./alacritty.yml
 cat ~/.config/nvim/coc-settings.json > ./coc-settings.json
 cat ~/.config/karabiner/assets/complex_modifications/1585362245.json > karabiner_complex_modifications.json
 cat ~/Library/Preferences/com.amethyst.Amethyst.plist > com.amethyst.Amethyst.plist
+cat ~/Library/Preferences/.GlobalPreferences.plist > ./.GlobalPreferences.plist
 git add .
 git commit -m "Updated configuration"
 git push

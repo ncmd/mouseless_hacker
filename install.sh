@@ -37,7 +37,6 @@ if [ ${machine} == "Mac"]; then
     pip install pynvim
     pip3 install pynvim
     npm install -g neovim
-    nvim -c PlugInstall
     nvim -c ":PlugInstall"
     nvim -c ":source ~/.vimrc"
 
@@ -50,8 +49,7 @@ if [ ${machine} == "Mac"]; then
     cargo install pier
     brew tap federico-terzi/espanso
     brew install espanso
-    cp -r ./espanso ~/espanso
-    # cargo install 
+    cp -r ./espanso ~/Library/Preferences/espanso
 
     # === FZF ===
     brew install fzf
@@ -71,10 +69,11 @@ if [ ${machine} == "Mac"]; then
 
     # === AMETHYST ===
     brew install amethyst
+    cp ./com.amethyst.Amethyst.plist ~/Library/Preferences/com.amethyst.Amethyst.plist
 
     # === ZSH ===
     cp ./.zshrc ~/.zshrc
-    source zshrc
+    source ~/.zshrc
 
     # === MAC KEYBOARD/MOUSE ===
     # swap esc with capslock
@@ -83,5 +82,6 @@ if [ ${machine} == "Mac"]; then
     # create application shortcuts
     # key repeat set to max
     # mouse sensitivity
+    cp ./.GlobalPreferences.plist ~/Library/Preferences/.GlobalPreferences.plist
 
 fi
