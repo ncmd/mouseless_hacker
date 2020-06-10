@@ -1,6 +1,3 @@
-# Install Nerd Fonts: 
-# brew tap homebrew/cask-fonts
-# brew cask install font-hack-nerd-font
 cat ~/pier.toml > ./pier.toml
 cat ~/.tmux.conf > ./.tmux.conf
 cat ~/.tmux.conf.local > ./.tmux.conf.local
@@ -10,6 +7,7 @@ cat ~/go/src/iterm/com.googlecode.iterm2.plist > ./iterm2.plist
 cat ~/.config/alacritty/alacritty.yml > ./alacritty.yml
 cat ~/.config/nvim/coc-settings.json > ./coc-settings.json
 cat ~/.config/karabiner/assets/complex_modifications/1585362245.json > karabiner_complex_modifications.json
+cat ~/Library/Preferences/com.amethyst.Amethyst.plist > com.amethyst.Amethyst.plist
 git add .
 git commit -m "Updated configuration"
 git push

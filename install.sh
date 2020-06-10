@@ -48,6 +48,9 @@ if [ ${machine} == "Mac"]; then
     rustup toolchain add stable
     cargo install --force cargo-make
     cargo install pier
+    brew tap federico-terzi/espanso
+    brew install espanso
+    cp -r ./espanso ~/espanso
     # cargo install 
 
     # === FZF ===
@@ -72,4 +75,13 @@ if [ ${machine} == "Mac"]; then
     # === ZSH ===
     cp ./.zshrc ~/.zshrc
     source zshrc
+
+    # === MAC KEYBOARD/MOUSE ===
+    # swap esc with capslock
+    # swap mission control
+    # swap spotlight
+    # create application shortcuts
+    # key repeat set to max
+    # mouse sensitivity
+
 fi
