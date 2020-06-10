@@ -232,7 +232,7 @@ Plug 'godlygeek/tabular'
 Plug 'frazrepo/vim-rainbow'
 " Matching Indent
 Plug 'yggdroot/indentline'
-Plug 'Yggdroot/hiPairs'
+" Plug 'Yggdroot/hiPairs'
 
 " Edit Surroundings
 " highlight word in visual mode -> shift+S -> {char} = {char}word{char}
@@ -541,26 +541,26 @@ let g:indentLine_char_list = [':','¦','|', '┃', '║', '░','▒','█']
 let g:indentLine_setConceal = 1
 let g:indentLine_enabled = 1
 
-let g:hiPairs_enable_matchParen = 1
-let g:hiPairs_timeout = 10
-let g:hiPairs_insert_timeout = 10
-let g:hiPairs_stopline_more = 100
-let g:hiPairs_hl_matchPair = { 'term'    : 'underline,bold',
-            \                  'cterm'   : 'bold',
-            \                  'ctermfg' : '0',
-            \                  'ctermbg' : 'lightgreen',
-            \                  'gui'     : 'bold',
-            \                  'guifg'   : 'Black',
-            \                  'guibg'   : '#A7ED1A' }
-
-let g:hiPairs_hl_unmatchPair = { 'term'    : 'underline,italic',
-            \                    'cterm'   : 'italic',
-            \                    'ctermfg' : '15',
-            \                    'ctermbg' : '12',
-            \                    'gui'     : 'italic',
-            \                    'guifg'   : 'White',
-            \                    'guibg'   : 'Red' }
-
+" let g:hiPairs_enable_matchParen = 0
+" let g:hiPairs_timeout = 1
+" let g:hiPairs_insert_timeout = 1
+" let g:hiPairs_stopline_more = 30
+" let g:hiPairs_hl_matchPair = { 'term'    : 'underline,bold',
+"             \                  'cterm'   : 'bold',
+"             \                  'ctermfg' : '0',
+"             \                  'ctermbg' : 'lightgreen',
+"             \                  'gui'     : 'bold',
+"             \                  'guifg'   : 'Black',
+"             \                  'guibg'   : '#A7ED1A' }
+"
+" let g:hiPairs_hl_unmatchPair = { 'term'    : 'underline,italic',
+"             \                    'cterm'   : 'italic',
+"             \                    'ctermfg' : '15',
+"             \                    'ctermbg' : '12',
+"             \                    'gui'     : 'italic',
+"             \                    'guifg'   : 'White',
+"             \                    'guibg'   : 'Red' }
+"
 " autocmd InsertEnter *
 " autocmd InsertLeave *
 set updatetime=100
