@@ -42,13 +42,14 @@ if [ ${machine} == "Mac" ]; then
     # === NEOVIM ===
     # VIM Plugin Manager
     brew install neovim
+    brew unlink neovim
     brew reinstall neovim
     brew install python3
     brew reinstall python3
     brew tap homebrew/cask-fonts
     brew cask install font-fira-code
     brew cask reinstall font-fira-code
-    mkdir -p~/.config/nvim/
+    mkdir -p ~/.config/nvim/
     cp ./.vimrc ~/.config/nvim/init.vim
     cp ./coc-settings.json ~/.config/nvim/coc-settings.json
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
@@ -121,7 +122,7 @@ if [ ${machine} == "Mac" ]; then
     brew install travis
     
     # === BROWSER ===
-    # Extensions: GoogleAdOptOut, DarkReader,Vimium,UblockOrigin
+    # Extensions: GoogleAdOptOut,DarkReader,Vimium,UblockOrigin
     
     # === GOOGLE CLOUD SDK ===
     brew cask install google-cloud-sdk
