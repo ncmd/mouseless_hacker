@@ -25,6 +25,8 @@ if [ ${machine} == "Mac" ]; then
     sudo chown $(whoami) /usr/local/share/*
     sudo chown $(whoami) /usr/local/lib
     sudo chown $(whoami) /usr/local/lib/*
+    sudo chown $(whoami) /usr/local/lib/*
+    sudo chmod -R g+rwx /usr/local/*
     brew install cmake
     brew upgrade cmake
     brew reinstall cmake
@@ -69,7 +71,7 @@ if [ ${machine} == "Mac" ]; then
     brew tap federico-terzi/espanso
     brew install espanso
     brew reinstall espanso
-    mkdir -p ~/Library/Preferences/espanso
+    mkdir -p ~/Library/Preferences/espanso/user
     cp -r ./espanso ~/Library/Preferences/espanso
 
     # === FZF ===
