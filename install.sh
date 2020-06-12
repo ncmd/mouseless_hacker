@@ -43,6 +43,7 @@ if [ ${machine} == "Mac" ]; then
     # VIM Plugin Manager
     brew install neovim
     brew unlink neovim
+    brew install --HEAD universal-ctags/universal-ctags/universal-ctags
     brew reinstall neovim
     brew install python3
     brew reinstall python3

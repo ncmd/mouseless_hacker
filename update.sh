@@ -7,6 +7,8 @@ cat ~/.tmux.conf > ./.tmux.conf
 cat ~/.tmux.conf.local > ./.tmux.conf.local
 # neovim
 cat ~/.vimrc > ./.vimrc
+# ctags
+cat ~/.ctags > ./.ctags
 # zsh
 cat ~/.zshrc > ./.zshrc
 # iterm2

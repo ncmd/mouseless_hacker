@@ -866,7 +866,9 @@
             {
               "type": "frontmost_application_if",
               "bundle_identifiers": [
-                "^io\\.alacritty$"
+                "^io\\.alacritty$",
+                "^com\\.googlecode\\.iterm2$",
+                "^com\\.insomnia\\.app$"
               ]
             }
           ],
@@ -891,7 +893,9 @@
             {
               "type": "frontmost_application_if",
               "bundle_identifiers": [
-                "^io\\.alacritty$"
+                "^io\\.alacritty$",
+                "^com\\.googlecode\\.iterm2$",
+                "^com\\.insomnia\\.app$"
               ]
             }
           ],
@@ -929,7 +933,9 @@
             {
               "type": "frontmost_application_if",
               "bundle_identifiers": [
-                "^io\\.alacritty$"
+                "^io\\.alacritty$",
+                "^com\\.googlecode\\.iterm2$",
+                "^com\\.insomnia\\.app$"
               ]
             }
           ],
@@ -954,7 +960,9 @@
             {
               "type": "frontmost_application_if",
               "bundle_identifiers": [
-                "^io\\.alacritty$"
+                "^io\\.alacritty$",
+                "^com\\.googlecode\\.iterm2$",
+                "^com\\.insomnia\\.app$"
               ]
             }
           ],
@@ -993,7 +1001,8 @@
               "type": "frontmost_application_if",
               "bundle_identifiers": [
                 "^io\\.alacritty$",
-                "^com\\.microsoft\\.VSCode$"
+                "^com\\.googlecode\\.iterm2$",
+                "^com\\.insomnia\\.app$"
               ]
             }
           ],
@@ -1019,7 +1028,8 @@
               "type": "frontmost_application_if",
               "bundle_identifiers": [
                 "^io\\.alacritty$",
-                "^com\\.microsoft\\.VSCode$"
+                "^com\\.googlecode\\.iterm2$",
+                "^com\\.insomnia\\.app$"
               ]
             }
           ],
@@ -1057,7 +1067,9 @@
             {
               "type": "frontmost_application_if",
               "bundle_identifiers": [
-                "^io\\.alacritty$"
+                "^io\\.alacritty$",
+                "^com\\.googlecode\\.iterm2$",
+                "^com\\.insomnia\\.app$"
               ]
             }
           ],
@@ -1082,7 +1094,9 @@
             {
               "type": "frontmost_application_if",
               "bundle_identifiers": [
-                "^io\\.alacritty$"
+                "^io\\.alacritty$",
+                "^com\\.googlecode\\.iterm2$",
+                "^com\\.insomnia\\.app$"
               ]
             }
           ],
@@ -1101,6 +1115,399 @@
                 "left_command"
               ],
               "repeat": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "colemak VIM i to l",
+      "manipulators": [
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "i to l",
+              "value": 1
+            },
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.insomnia\\.app$"
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "l"
+          },
+          "to": [
+            {
+              "key_code": "u"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.insomnia\\.app$"
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "l",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "u"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "colemak VIM u to i",
+      "manipulators": [
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "u to i",
+              "value": 1
+            },
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.insomnia\\.app$"
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "l"
+          },
+          "to": [
+            {
+              "key_code": "u"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.insomnia\\.app$"
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "l",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "u"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "colemak VIM e to k",
+      "manipulators": [
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "e to k",
+              "value": 1
+            },
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.insomnia\\.app$"
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "k"
+          },
+          "to": [
+            {
+              "key_code": "n"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.insomnia\\.app$"
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "k",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "n"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "colemak VIM n to j",
+      "manipulators": [
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "n to j",
+              "value": 1
+            },
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.insomnia\\.app$"
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "j",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "y"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.insomnia\\.app$"
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "j",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "y"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "colemak VIM h to h",
+      "manipulators": [
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "h to h",
+              "value": 1
+            },
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.insomnia\\.app$"
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "h",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "h"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.insomnia\\.app$"
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "h",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "h"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "colemak VIM u to i",
+      "manipulators": [
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "u to i",
+              "value": 1
+            },
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.insomnia\\.app$"
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "i",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "l"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.insomnia\\.app$"
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "i",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "l"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "colemak VIM I to U",
+      "manipulators": [
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "I to U",
+              "value": 1
+            },
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.insomnia\\.app$"
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "i",
+            "modifiers": {
+              "mandatory": [
+                "command",
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "l"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.insomnia\\.app$"
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "i",
+            "modifiers": {
+              "mandatory": [
+                "command",
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "i"
             }
           ]
         }

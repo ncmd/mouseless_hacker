@@ -101,6 +101,10 @@ else
 " Go back after GoTo definition
   nnoremap <leader>o <C-o><CR>
 
+" blackhole buffer with leader+p
+  nnoremap <leader>p "_dP
+  vnoremap <leader>p "_dP
+
 " Unmapping accidental normal mode keys
   nnoremap E <NOP>
   nnoremap s <NOP>
@@ -124,7 +128,13 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'patstockwell/vim-monokai-tasty'
 Plug 'arzg/vim-rust-syntax-ext'
 
+" Code/git modifications
 Plug 'mhinz/vim-signify'
+
+" Functions in code
+Plug 'majutsushi/tagbar'
+nmap <leader>tb :TagbarToggle<CR>
+
 " Airline Stuff
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -539,6 +549,56 @@ let g:indentLine_setColors = 1
 let g:indentLine_char_list = [':','¦','|', '┃', '║', '░','▒','█']
 let g:indentLine_setConceal = 1
 let g:indentLine_enabled = 1
+
+
+let g:tagbar_type_rust = {
+   \ 'ctagstype' : 'rust',
+   \ 'kinds' : [
+       \'T:types,type definitions',
+       \'f:functions,function definitions',
+       \'g:enum,enumeration names',
+       \'s:structure names',
+       \'m:modules,module names',
+       \'c:consts,static constants',
+       \'t:traits',
+       \'i:impls,trait implementations',
+   \]
+   \}
+
+let g:rust_use_custom_ctags_defs = 1
+let g:tagbar_type_rust = {
+  \ 'ctagsbin' : '/usr/local/bin/ctags',
+  \ 'ctagstype' : 'rust',
+  \ 'kinds' : [
+      \ 'n:modules',
+      \ 's:structures:1',
+      \ 'i:interfaces',
+      \ 'c:implementations',
+      \ 'f:functions:1',
+      \ 'g:enumerations:1',
+      \ 't:type aliases:1:0',
+      \ 'v:constants:1:0',
+      \ 'M:macros:1',
+      \ 'm:fields:1:0',
+      \ 'e:enum variants:1:0',
+      \ 'P:methods:1',
+  \ ],
+  \ 'sro': '::',
+  \ 'kind2scope' : {
+      \ 'n': 'module',
+      \ 's': 'struct',
+      \ 'i': 'interface',
+      \ 'c': 'implementation',
+      \ 'f': 'function',
+      \ 'g': 'enum',
+      \ 't': 'typedef',
+      \ 'v': 'variable',
+      \ 'M': 'macro',
+      \ 'm': 'field',
+      \ 'e': 'enumerator',
+      \ 'P': 'method',
+  \ },
+\ }
 
 " let g:hiPairs_enable_matchParen = 0
 " let g:hiPairs_timeout = 1
