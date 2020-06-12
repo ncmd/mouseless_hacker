@@ -25,7 +25,6 @@ if [ ${machine} == "Mac" ]; then
     sudo chown $(whoami) /usr/local/share/*
     sudo chown $(whoami) /usr/local/lib
     sudo chown $(whoami) /usr/local/lib/*
-    sudo chown $(whoami) /usr/local/lib/*
     sudo chmod -R g+rwx /usr/local/*
     brew install cmake
     brew upgrade cmake
@@ -79,6 +78,8 @@ if [ ${machine} == "Mac" ]; then
     # === FZF ===
     brew install fzf
     brew reinstall fzf
+    brew tap ajeetdsouza/zoxide
+    brew install zoxide
     $(brew --prefix)/opt/fzf/install
 
     # === TMUX ===
