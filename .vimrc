@@ -46,6 +46,8 @@ set wrapmargin=0
 set breakindent
 let &showbreak='    '
 
+set undodir=~/.vim/undodir
+
 highlight ColorColumn ctermbg=0 guibg=#303030
 
 hi cursorline cterm=none term=none
@@ -79,7 +81,7 @@ else
   nnoremap U u
   vnoremap U u
 " redo
-  noremap <leader>r <C-r>
+  noremap R <C-r>
 " down
   nnoremap n j
   vnoremap n j
@@ -92,8 +94,13 @@ else
 " left = h
 
 " Copy to clipboard
+  vnoremap Y "*y
   nnoremap Y "*y
 
+" Select cursor to rest of line to buffer
+  vnoremap u $y
+  vnoremap o $"_dP
+  
 " move up/down 10 lines
   nnoremap 7 10j
   nnoremap 8 10k
@@ -131,6 +138,10 @@ Plug 'arzg/vim-rust-syntax-ext'
 " Code/git modifications
 Plug 'mhinz/vim-signify'
 
+" File history
+Plug 'mbbill/undotree'
+nnoremap <leader>l :UndotreeShow<CR>
+
 " Functions in code
 Plug 'majutsushi/tagbar'
 nmap <leader>tb :TagbarToggle<CR>
@@ -148,14 +159,8 @@ Plug 'christoomey/vim-tmux-navigator'
 
 " Rust
 Plug 'rust-lang/rust.vim'
-nnoremap <leader>CB :CargoBuild<CR>
-nnoremap <leader>CC :CargoClean<CR>
-nnoremap <leader>CD :CargoDoc<CR>
-nnoremap <leader>CR :CargoRun<CR>
-nnoremap <leader>CT :CargoTest<CR>
-nnoremap <leader>CU :CargoUpdate<CR>
-
 Plug 'dense-analysis/ale'
+
 
 "==============================================================================
 " VIM autocomplete suggestions
@@ -164,11 +169,15 @@ Plug 'dense-analysis/ale'
 Plug 'racer-rust/vim-racer'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+nmap <leader>cn :CocDisable<CR>:ALEDisable<CR>
+nmap <leader>ce :CocEnable<CR>:CocRestart<CR>:ALEEnable<CR>
 " GoTo code navigation.
 nmap <leader>do <Plug>(rust-doc)
 nmap <leader>gd <Plug>(coc-definition)
+" Go Back to previous file
 nmap <leader>gb <C-o>
 nmap <leader>gr <Plug>(coc-references)
+nmap <leader>ge <Plug>(coc-diagnostic-next-error)
 nnoremap <leader>cr :CocRestart<CR>
 map <leader>CM :CocList marketplace<CR>
 " :coc-rls
@@ -182,7 +191,7 @@ Plug 'sheerun/vim-polyglot'
 "==============================================================================
 " File/content search
 "==============================================================================
-" :Files = fuzzzy search file by path and name
+" :Files = fuzzy search file by path and name
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 map <leader><BS> :Files<CR>
@@ -241,7 +250,6 @@ Plug 'godlygeek/tabular'
 Plug 'frazrepo/vim-rainbow'
 " Matching Indent
 Plug 'yggdroot/indentline'
-" Plug 'Yggdroot/hiPairs'
 
 " Edit Surroundings
 " highlight word in visual mode -> shift+S -> {char} = {char}word{char}
@@ -351,6 +359,9 @@ call plug#end()
 "==============================================================================
 "Activate Plug features
 "==============================================================================
+
+" VimBeGood
+let g:vim_be_good_floating = 1
 
 " Rust Docs
 let g:rust_doc#downloaded_rust_doc_dir = '~/rust-docs/'
@@ -511,7 +522,7 @@ hi rsUserMethod guifg=#A7ED1A guibg=#000000 ctermfg=green ctermbg=NONE
 hi rsLibraryType guifg=#5730B3 guibg=#000000 ctermfg=lightblue ctermbg=NONE
 hi rsLibraryMacro guifg=#66D9EF guibg=#000000 ctermfg=lightblue ctermbg=NONE
 hi rsFieldAccess guifg=#66D9EF guibg=#000000 ctermfg=lightblue ctermbg=NONE
-hi rsAttribute guifg=#B70444 guibg=#000000 ctermfg=red ctermbg=NONE
+hi rsAttribute guifg=#B70444 guibg=#000000 ctermfg=grey ctermbg=NONE
 hi rsForeignType guifg=#FFFFFF guibg=#000000 ctermfg=white ctermbg=NONE
 hi rsForeignFunc guifg=#A7ED1A guibg=#000000 ctermfg=green ctermbg=NONE
 
@@ -538,7 +549,6 @@ let g:lightline = {
 let g:promptline_theme = 'dracula'
 let g:airline_theme='dracula'
 let g:airline_powerline_fonts = 1
-
 
 let g:signify_sign_add = '►'
 let g:signify_sign_change = '┃'
@@ -600,28 +610,6 @@ let g:tagbar_type_rust = {
   \ },
 \ }
 
-" let g:hiPairs_enable_matchParen = 0
-" let g:hiPairs_timeout = 1
-" let g:hiPairs_insert_timeout = 1
-" let g:hiPairs_stopline_more = 30
-" let g:hiPairs_hl_matchPair = { 'term'    : 'underline,bold',
-"             \                  'cterm'   : 'bold',
-"             \                  'ctermfg' : '0',
-"             \                  'ctermbg' : 'lightgreen',
-"             \                  'gui'     : 'bold',
-"             \                  'guifg'   : 'Black',
-"             \                  'guibg'   : '#A7ED1A' }
-"
-" let g:hiPairs_hl_unmatchPair = { 'term'    : 'underline,italic',
-"             \                    'cterm'   : 'italic',
-"             \                    'ctermfg' : '15',
-"             \                    'ctermbg' : '12',
-"             \                    'gui'     : 'italic',
-"             \                    'guifg'   : 'White',
-"             \                    'guibg'   : 'Red' }
-"
-" autocmd InsertEnter *
-" autocmd InsertLeave *
 set updatetime=100
 
 hi Normal ctermbg=NONE ctermfg=NONE guifg=NONE guibg=NONE
