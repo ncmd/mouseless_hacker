@@ -11,7 +11,7 @@ define_multipurpose_modmap({
 define_keymap(re.compile("Brave"), {
     K("LC-Q"): K("LC-LShift-TAB"),
     K("LC-W"): K("LC-TAB"),
-    K("LC-G"): K("LC-W"),
+    K("LC-T"): K("LC-W"),
     # map copypasta
     K("LC-C"): K("LShift-LC-C"),                # COPY
     K("LC-V"): K("LShift-LC-V"),                # PASTE
