@@ -11,6 +11,10 @@ define_keymap(re.compile("Brave"), {
     K("LC-Q"): K("LC-LShift-TAB"),
     K("LC-W"): K("LC-TAB"),
     K("LC-G"): K("LC-W"),
+    # map copypasta
+    K("LC-C"): K("LShift-LC-C"),                # COPY
+    K("LC-V"): K("LShift-LC-V"),                # PASTE
+    K("LC-X"): K("LShift-LC-X"),                # CUT
 }, "Brave")
 
 
@@ -18,9 +22,7 @@ define_keymap(None, {
     # map super
     K("LC-LSuper-BACKSLASH"): Key.LEFT_META,
     # map copypasta
-    K("LC-C"): K("LShift-LC-C"),                # COPY
     K("LC-V"): K("LShift-LC-V"),                # PASTE
-    K("LC-X"): K("LShift-LC-X"),                # CUT
     # map arrow keys hnei
     K("LShift-LSuper-K"): K("UP"),
     K("LShift-LSuper-J"): K("DOWN"),
