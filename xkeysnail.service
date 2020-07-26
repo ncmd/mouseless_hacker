@@ -1,0 +1,13 @@
+[Unit]
+Description=xkeysnail
+
+[Service]
+Environment=DISPLAY=:0
+ExecStart=/usr/local/bin/xkeysnail /usr/local/sbin/xkeysnail_config.py -q
+StandardOutput=null
+Restart=always
+Type=simple
+RestartSec=10
+
+[Install]
+WantedBy=graphical.target
