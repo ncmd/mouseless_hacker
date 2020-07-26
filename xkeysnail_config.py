@@ -3,7 +3,8 @@ from xkeysnail.transform import *
 
 define_multipurpose_modmap({
     Key.BACKSPACE: [Key.BACKSPACE, Key.LEFT_META],
-    Key.SPACE: [Key.SPACE, Key.LEFT_CTRL]
+    Key.SPACE: [Key.SPACE, Key.LEFT_CTRL],
+    Key.RIGHT_SHIFT: [Key.GRAVE, Key.RIGHT_SHIFT],
 })
 
 # Keybindings for Brave
@@ -28,8 +29,6 @@ define_keymap(None, {
     K("LShift-LSuper-J"): K("DOWN"),
     K("LShift-LSuper-H"): K("LEFT"),
     K("LShift-LSuper-L"): K("RIGHT"),
-    # map grave/tilde
-    K("GRAVE"): K("RShift-GRAVE"),
     # map numbers to home row
     K("LC-A"): Key.KEY_1,                       # 1
     K("LC-S"): Key.KEY_2,                       # 2
