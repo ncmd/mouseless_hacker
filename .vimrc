@@ -337,9 +337,9 @@ map <leader>mk :mksession!<CR>
 
 Plug 'kshenoy/vim-signature'
 " mark
-nnoremap ma ma
-nnoremap mt mt
-nnoremap mm <NOP>
+" nnoremap ma <NOP>
+" nnoremap mt <NOP>
+" nnoremap mm <NOP>
 " remove mark
 "   m
 map mx m-
