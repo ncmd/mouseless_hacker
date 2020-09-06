@@ -93,9 +93,13 @@ else
   vnoremap i l
 " left = h
 
-" Copy to clipboard
+" Copy to system clipboard
+" MAC
   vnoremap Y "*y
   nnoremap Y "*y
+" LINUX
+  vnoremap Y "+y
+  nnoremap Y "+y
 
 " Select cursor to rest of line to buffer
   vnoremap u $y
