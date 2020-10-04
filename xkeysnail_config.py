@@ -20,6 +20,8 @@ define_keymap(re.compile("Brave"), {
 
 
 define_keymap(None, {
+    # map capslock = esc
+    K("CAPSLOCK"): Key.ESC,
     # map super
     K("LC-LSuper-BACKSLASH"): Key.LEFT_META,
     # map copypasta
