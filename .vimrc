@@ -12,6 +12,7 @@ set mouse=
 set cursorline
 set nonumber
 set hidden
+set clipboard=unnamedplus
 " no error sounds
 set noerrorbells
 " tabs always 4 spaces
@@ -93,18 +94,14 @@ else
   vnoremap i l
 " left = h
 
-" Copy to system clipboard
-" MAC
-  vnoremap Y "*y
-  nnoremap Y "*y
-" LINUX
+" Copy to clipboard
   vnoremap Y "+y
   nnoremap Y "+y
 
 " Select cursor to rest of line to buffer
   vnoremap u $y
   vnoremap o $"_dP
-  
+
 " move up/down 10 lines
   nnoremap 7 10j
   nnoremap 8 10k
@@ -128,11 +125,18 @@ else
   nnoremap j <NOP>
   nnoremap k <NOP>
 
+" markdown hidden maps
+" <leader> = on a line with '- ' 
+" will add a checkbox [ ] | [x]
+" Example
+" - test line
+" - [ ] test line
+
 " VIM plugin manager
 call plug#begin('~/.config/nvim/plugged')
 
-" type :VimBeGood to play
-Plug 'ThePrimeagen/vim-be-good'
+" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 " VIM theme
 Plug 'dracula/vim', { 'as': 'dracula' }
@@ -165,6 +169,12 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'rust-lang/rust.vim'
 Plug 'dense-analysis/ale'
 
+" CSharp
+Plug 'OmniSharp/omnisharp-vim'
+nmap <leader>or :OmniSharpRestartServer<CR>
+nmap <leader>ou :OmniSharpFixUsings<CR>
+nmap <leader>oa :OmniSharpGetCodeActions<CR>
+nmap <leader>od :OmniSharpGotoDefinition<CR>
 
 "==============================================================================
 " VIM autocomplete suggestions
@@ -190,7 +200,7 @@ map <leader>CM :CocList marketplace<CR>
 
 set wildmode=longest,list,full
 
-Plug 'sheerun/vim-polyglot'
+" Plug 'sheerun/vim-polyglot'
 
 "==============================================================================
 " File/content search
@@ -222,6 +232,9 @@ Plug 'haya14busa/incsearch-easymotion.vim'
 map z/ <Plug>(incsearch-easymotion-/)
 map z? <Plug>(incsearch-easymotion-?)
 map zg/ <Plug>(incsearch-easymotion-stay)
+
+" Markdown parsing
+Plug 'gabrielelana/vim-markdown'
 
 " Text replace
 Plug 'tpope/vim-abolish'
@@ -358,6 +371,10 @@ Plug 'jparise/vim-graphql'
 " Have same bash shortcuts in Insert mode
 Plug 'tpope/vim-rsi'
 
+" Godot
+" Plug 'habamax/vim-godot'
+" nnoremap <leader>dr :GodotRun<CR>
+
 call plug#end()
 
 "==============================================================================
@@ -427,8 +444,8 @@ let g:nerdtree_tabs_startup_cd = 0
 " Automatically find and select currently opened file in NERDTree.
 let g:nerdtree_tabs_autofind = 1
 
-let g:NERDTreeShowIgnoredStatus = 1
-let g:NERDTreeIndicatorMapCustom = {
+let g:NERDTreeGitStatusShowIgnored = 1
+let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Modified"  : "MODIFIED",
     \ "Staged"    : "STAGED",
     \ "Untracked" : "UNTRACKED",
@@ -443,7 +460,37 @@ let g:NERDTreeIndicatorMapCustom = {
 
 
 " Ale
-let g:ale_linters = {'rust': ['analyzer']}
+" let g:ale_linters = {'rust': ['analyzer']}
+
+" Enable ALE auto completion globally
+let g:ale_completion_enabled = 1
+
+" Allow ALE to autoimport completion entries from LSP servers
+let g:ale_completion_autoimport = 1
+
+" " Register LSP server for Godot:
+" call ale#linter#Define('gdscript', {
+" \   'name': 'godot',
+" \   'lsp': 'socket',
+" \   'address': '127.0.0.1:6008',
+" \   'project_root': 'project.godot',
+" \})
+"
+let g:ale_linters = {
+\ 'cs': ['OmniSharp']
+\}
+
+let g:OmniSharp_server_use_mono = 1
+
+augroup omnisharp_commands
+  autocmd!
+
+  " Show type information automatically when the cursor stops moving.
+  " Note that the type is echoed to the Vim command line, and will overwrite
+  " any other messages in this space including e.g. ALE linting messages.
+  autocmd CursorHold *.cs OmniSharpTypeLookup
+
+augroup END
 
 " Rustfmt autosave
 let g:rustfmt_autosave = 0
@@ -485,34 +532,11 @@ set t_8f=^[[38;2;%lu;%lu;%lum
 " hot key for what color is this
 nmap <leader>wc :echo synIDattr(synID(line('.'), col('.'), 1), 'name')<CR>
 
-hi NERDTreeDir guifg=#FFFFFF guibg=#000000 gui=bold ctermfg=white ctermbg=NONE cterm=bold
-hi NERDTreeGitStatusModified guifg=#66D9EF guibg=#000000 gui=bold ctermfg=lightblue ctermbg=NONE cterm=bold
-hi NERDTreeGitStatusIgnored guifg=#FA023C guibg=#000000 gui=bold ctermfg=red ctermbg=NONE cterm=bold
-hi NERDTreeGitStatusDirDirty guifg=#66D9EF guibg=#000000 gui=bold ctermfg=green ctermbg=NONE cterm=bold
-hi NERDTreeGitStatusUntracked guifg=#A7ED1A guibg=#000000 gui=bold ctermfg=green ctermbg=NONE cterm=bold
-
-" not using vim-rust-syntax-ext
-" hi rustModPath ctermfg=white
-" hi rustIdentifier ctermfg=white
-" hi rustTypedef guifg=#62D8F1
-" hi rustType guifg=#62D8F1
-" hi rustMacro guifg=#62D8F1
-" hi rustDerive guifg=#FFFFFF
-" hi rustAttribute guifg=#FFFFFF
-" hi rustEnum guifg=#62D8F1
-" hi rustTrait guifg=#FC1A70
-" hi rustStructure guifg=#62D8F1
-" hi rustFuncCall guifg=#A7ED1A
-" hi rustFuncName guifg=#A4E400
-" hi rustKeyword guifg=#B70444
-" hi rustAsync guifg=#B70444
-" hi rustRepeat guifg=#FC1A70
-" hi rustConditional guifg=#ff80bf
-" hi rustSelf guifg=#FF9700
-" hi rustString guifg=#ff7ab2
-" hi rustStringDelimiter guifg=#d9c97c
-" hi rustStorage guifg=#ff9580
-" hi rustCommentLine guifg=#bebebe
+" hi NERDTreeDir guifg=#FFFFFF guibg=#000000 gui=bold ctermfg=white ctermbg=NONE cterm=bold
+" hi NERDTreeGitStatusModified guifg=#66D9EF guibg=#000000 gui=bold ctermfg=lightblue ctermbg=NONE cterm=bold
+" hi NERDTreeGitStatusIgnored guifg=#FA023C guibg=#000000 gui=bold ctermfg=red ctermbg=NONE cterm=bold
+" hi NERDTreeGitStatusDirDirty guifg=#66D9EF guibg=#000000 gui=bold ctermfg=green ctermbg=NONE cterm=bold
+" hi NERDTreeGitStatusUntracked guifg=#A7ED1A guibg=#000000 gui=bold ctermfg=green ctermbg=NONE cterm=bold
 
 " vim-rust-syntax-ext
 hi rsModule guifg=#FFFFFF guibg=#000000 ctermfg=white ctermbg=NONE
@@ -632,5 +656,6 @@ map <leader>FS :source ~/.vimrc<CR>
 map <leader>FI :PlugInstall<CR>
 map <leader>FC :PlugClean<CR>
 map <leader>FU :PlugUpdate<CR>
+map <leader>FJ :%!python3 -m json.tool<CR>
 
 endif
