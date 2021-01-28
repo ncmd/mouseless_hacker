@@ -12,7 +12,7 @@
 #
 # Project page; http://www.semicomplete.com/projects/keynav
 
-# daemonize  # background keynav
+daemonize  # background keynav
 clear      # clear all previous keybindings
 
 # q record ~/.keynav_macros
@@ -34,7 +34,7 @@ v cell-select 3x3,warp,click 1,end # down-right
 s cell-select 2x2,warp,click 1,end # center
 #ctrl+semicolon start,cut-left .95, cut-up .95, move-right 50, move-down 20
 # alt+semicolon start,move-right
-# Escape end
+Escape end
 # ctrl+bracketleft end
 shift+h cut-left
 shift+n cut-down
@@ -48,10 +48,10 @@ h move-left
 n move-down
 e move-up
 i move-right
-# shift+y move-left,move-up
-# shift+u move-right,move-up
-# shift+b move-left,move-down
-# shift+n move-right,move-down
+l move-left,move-up
+m move-left,move-down
+y move-right,move-up
+period move-right,move-down
 # space warp,click 1,end
 Delete warp,click 2,end
 # m click 1
