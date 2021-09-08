@@ -24,23 +24,23 @@ Tab restart
 ctrl+Delete start, grid 3x3
 ctrl+Tab start, grid 3x3,cursorzoom 70 70 
 f cell-select 2x1,warp,click 1,end # up
-ctrl+f cell-select 2x1,warp,click 1, click 1,end # up
+shift+f cell-select 2x1,warp,click 1, click 1,end # up
 t cell-select 3x2,warp,click 1,end # right
-ctrl+t cell-select 3x2,warp,click 1,click 1,end # right
+shift+t cell-select 3x2,warp,click 1,click 1,end # right
 r cell-select 1x2,warp,click 1,end # left
-ctrl+r cell-select 1x2,warp,click 1,click 1,end # left
+shift+r cell-select 1x2,warp,click 1,click 1,end # left
 c cell-select 2x3,warp,click 1,end # down
-ctrl+c cell-select 2x3,warp,click 1,click 1,end # down
+shift+c cell-select 2x3,warp,click 1,click 1,end # down
 w cell-select 1x1,warp,click 1,end # up-left
-ctrl+w cell-select 1x1,warp,click 1,click 1,end # up-left
+shift+w cell-select 1x1,warp,click 1,click 1,end # up-left
 x cell-select 1x3,warp,click 1,end # up-right
-ctrl+x cell-select 1x3,warp,click 1,click 1,end # up-right
+shift+x cell-select 1x3,warp,click 1,click 1,end # up-right
 p cell-select 3x1,warp,click 1,end # down-left
-ctrl+p cell-select 3x1,warp,click 1, click 1,end # down-left
+shift+p cell-select 3x1,warp,click 1, click 1,end # down-left
 v cell-select 3x3,warp,click 1,end # down-right
-ctrl+v cell-select 3x3,warp,click 1,end # down-right
+shift+v cell-select 3x3,warp,click 1,end # down-right
 s cell-select 2x2,warp,click 1,end # center
-ctrl+s cell-select 2x2,warp,click 1, click 1,end # center
+shift+s cell-select 2x2,warp,click 1, click 1,end # center
 #ctrl+semicolon start,cut-left .95, cut-up .95, move-right 50, move-down 20
 # alt+semicolon start,move-right
 Escape end

@@ -113,6 +113,7 @@ else
   nnoremap <leader>p "_dP
   vnoremap <leader>p "_dP
 
+
 " Unmapping accidental normal mode keys
   nnoremap E <NOP>
   nnoremap s <NOP>
@@ -126,11 +127,18 @@ else
   nnoremap k <NOP>
 
 " markdown hidden maps
-" <leader> = on a line with '- ' 
+" <leader> = on a line with '- '
 " will add a checkbox [ ] | [x]
 " Example
 " - test line
 " - [ ] test line
+" blackhole markdown bullet with leader+a
+  nnoremap <leader>a <NOP>
+  nnoremap <leader>u <NOP>
+  nnoremap <leader>v <NOP>
+  nnoremap <leader>x <NOP>
+  nnoremap <leader>z <NOP>
+  nnoremap <leader>e <NOP>
 
 " VIM plugin manager
 call plug#begin('~/.config/nvim/plugged')
@@ -169,12 +177,17 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'rust-lang/rust.vim'
 Plug 'dense-analysis/ale'
 
+" Javascript
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'maxmellon/vim-jsx-pretty'
+
 " CSharp
-Plug 'OmniSharp/omnisharp-vim'
-nmap <leader>or :OmniSharpRestartServer<CR>
-nmap <leader>ou :OmniSharpFixUsings<CR>
-nmap <leader>oa :OmniSharpGetCodeActions<CR>
-nmap <leader>od :OmniSharpGotoDefinition<CR>
+" Plug 'OmniSharp/omnisharp-vim'
+" nmap <leader>or :OmniSharpRestartServer<CR>
+" nmap <leader>ou :OmniSharpFixUsings<CR>
+" nmap <leader>oa :OmniSharpGetCodeActions<CR>
+" nmap <leader>od :OmniSharpGotoDefinition<CR>
 
 "==============================================================================
 " VIM autocomplete suggestions
@@ -183,6 +196,7 @@ nmap <leader>od :OmniSharpGotoDefinition<CR>
 Plug 'racer-rust/vim-racer'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+nmap <leader>ca :CocAction<CR>
 nmap <leader>cn :CocDisable<CR>:ALEDisable<CR>
 nmap <leader>ce :CocEnable<CR>:CocRestart<CR>:ALEEnable<CR>
 " GoTo code navigation.
@@ -192,6 +206,7 @@ nmap <leader>gd <Plug>(coc-definition)
 nmap <leader>gb <C-o>
 nmap <leader>gr <Plug>(coc-references)
 nmap <leader>ge <Plug>(coc-diagnostic-next-error)
+nmap <leader>gi <Plug>(coc-diagnostic-info)
 nnoremap <leader>cr :CocRestart<CR>
 map <leader>CM :CocList marketplace<CR>
 " :coc-rls
@@ -371,18 +386,18 @@ Plug 'jparise/vim-graphql'
 " Have same bash shortcuts in Insert mode
 Plug 'tpope/vim-rsi'
 
-" Godot
-" Plug 'habamax/vim-godot'
-" nnoremap <leader>dr :GodotRun<CR>
+
+" post install (yarn install | npm install) then load plugin only for editing supported files
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
+
 
 call plug#end()
 
 "==============================================================================
 "Activate Plug features
 "==============================================================================
-
-" VimBeGood
-let g:vim_be_good_floating = 1
 
 " Rust Docs
 let g:rust_doc#downloaded_rust_doc_dir = '~/rust-docs/'
@@ -460,7 +475,14 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
 
 
 " Ale
-" let g:ale_linters = {'rust': ['analyzer']}
+let g:ale_linter_aliases = {'js': ['javascript']}
+let g:ale_linters = {'rust': ['analyzer'], 'jsx': ['stylelint','eslint']}
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['prettier'],
+\   'css': ['prettier'],
+\}
+let g:ale_fix_on_save = 1
 
 " Enable ALE auto completion globally
 let g:ale_completion_enabled = 1
@@ -476,21 +498,21 @@ let g:ale_completion_autoimport = 1
 " \   'project_root': 'project.godot',
 " \})
 "
-let g:ale_linters = {
-\ 'cs': ['OmniSharp']
-\}
+" let g:ale_linters = {
+" \ 'cs': ['OmniSharp']
+" \}
 
-let g:OmniSharp_server_use_mono = 1
+" let g:OmniSharp_server_use_mono = 1
 
-augroup omnisharp_commands
-  autocmd!
-
-  " Show type information automatically when the cursor stops moving.
-  " Note that the type is echoed to the Vim command line, and will overwrite
-  " any other messages in this space including e.g. ALE linting messages.
-  autocmd CursorHold *.cs OmniSharpTypeLookup
-
-augroup END
+" augroup omnisharp_commands
+"   autocmd!
+"
+"   " Show type information automatically when the cursor stops moving.
+"   " Note that the type is echoed to the Vim command line, and will overwrite
+"   " any other messages in this space including e.g. ALE linting messages.
+"   autocmd CursorHold *.cs OmniSharpTypeLookup
+"
+" augroup END
 
 " Rustfmt autosave
 let g:rustfmt_autosave = 0
