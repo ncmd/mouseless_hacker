@@ -156,7 +156,7 @@ Plug 'mhinz/vim-signify'
 
 " File history
 Plug 'mbbill/undotree'
-nnoremap <leader>l :UndotreeShow<CR>
+nnoremap <leader>us :UndotreeShow<CR>
 
 " Functions in code
 Plug 'majutsushi/tagbar'
@@ -176,6 +176,21 @@ Plug 'christoomey/vim-tmux-navigator'
 " Rust
 Plug 'rust-lang/rust.vim'
 Plug 'dense-analysis/ale'
+" https://sharksforarms.dev/posts/neovim-rust/
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'simrat39/rust-tools.nvim'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+
+" Elixir
+Plug 'elixir-editors/vim-elixir'
 
 " Javascript
 Plug 'pangloss/vim-javascript'
@@ -195,6 +210,9 @@ Plug 'maxmellon/vim-jsx-pretty'
 " You will need to install racer via cargo
 Plug 'racer-rust/vim-racer'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Install following manually:
+" :CocInstall coc-rls
+" :CocInstall coc-elixir
 
 nmap <leader>ca :CocAction<CR>
 nmap <leader>cn :CocDisable<CR>:ALEDisable<CR>
@@ -208,10 +226,17 @@ nmap <leader>gr <Plug>(coc-references)
 nmap <leader>ge <Plug>(coc-diagnostic-next-error)
 nmap <leader>gi <Plug>(coc-diagnostic-info)
 nnoremap <leader>cr :CocRestart<CR>
-map <leader>CM :CocList marketplace<CR>
-" :coc-rls
-" :coc-marketplace
-" :coc-rust-analyzer
+
+" Code navigation shortcuts
+nnoremap <leader>E     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <leader>Ei    <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <leader>Et    <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <leader>Er    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <leader>Es    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <leader>Ew    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+nnoremap <leader>Ed    <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <leader>Ea    <cmd>lua vim.lsp.buf.code_action()<CR>
+
 
 set wildmode=longest,list,full
 
@@ -475,14 +500,20 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
 
 
 " Ale
+let g:ale_rust_rustfmt_options = '--edition 2018'
 let g:ale_linter_aliases = {'js': ['javascript']}
-let g:ale_linters = {'rust': ['analyzer'], 'jsx': ['stylelint','eslint']}
+let g:ale_linters = {'rust': ['analyzer', 'cargo'], 'jsx': ['stylelint','eslint'], 'elixir': ['elixir-ls']}
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['prettier'],
 \   'css': ['prettier'],
+\   'rust': ['rustfmt'],
+\   'elixir': ['mix_format'],
 \}
 let g:ale_fix_on_save = 1
+let g:ale_rust_cargo_use_clippy = 1
+let g:ale_rust_cargo_check_tests = 1
+let g:ale_rust_cargo_check_examples = 1
 
 " Enable ALE auto completion globally
 let g:ale_completion_enabled = 1
@@ -490,14 +521,6 @@ let g:ale_completion_enabled = 1
 " Allow ALE to autoimport completion entries from LSP servers
 let g:ale_completion_autoimport = 1
 
-" " Register LSP server for Godot:
-" call ale#linter#Define('gdscript', {
-" \   'name': 'godot',
-" \   'lsp': 'socket',
-" \   'address': '127.0.0.1:6008',
-" \   'project_root': 'project.godot',
-" \})
-"
 " let g:ale_linters = {
 " \ 'cs': ['OmniSharp']
 " \}
@@ -527,6 +550,102 @@ let g:incsearch#auto_nohlsearch = 1
 map N  <Plug>(incsearch-nohl-N)
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
+
+"==============================================================================
+" RUST + LSP
+"==============================================================================
+
+
+" Set completeopt to have a better completion experience
+" :help completeopt
+" menuone: popup even when there's only one match
+" noinsert: Do not insert text until a selection is made
+" noselect: Do not select, force user to select one from the menu
+set completeopt=menuone,noinsert,noselect
+
+" Avoid showing extra messages when using completion
+set shortmess+=c
+
+" Configure LSP through rust-tools.nvim plugin.
+" rust-tools will configure and enable certain LSP features for us.
+" See https://github.com/simrat39/rust-tools.nvim#configuration
+lua <<EOF
+local nvim_lsp = require'lspconfig'
+
+local opts = {
+    tools = { -- rust-tools options
+        autoSetHints = true,
+        hover_with_actions = true,
+        inlay_hints = {
+            show_parameter_hints = false,
+            parameter_hints_prefix = "",
+            other_hints_prefix = "",
+        },
+    },
+
+    -- all the opts to send to nvim-lspconfig
+    -- these override the defaults set by rust-tools.nvim
+    -- see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
+    server = {
+        -- on_attach is a callback called when the language server attachs to the buffer
+        -- on_attach = on_attach,
+        settings = {
+            -- to enable rust-analyzer settings visit:
+            -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
+            ["rust-analyzer"] = {
+                -- enable clippy on save
+                checkOnSave = {
+                    command = "clippy"
+                },
+            }
+        }
+    },
+}
+
+require('rust-tools').setup(opts)
+require'lspconfig'.elixirls.setup{
+    cmd = { "/home/user/.elixirls/language_server.sh" };
+}
+EOF
+
+" Setup Completion
+" See https://github.com/hrsh7th/nvim-cmp#basic-configuration
+lua <<EOF
+local cmp = require'cmp'
+cmp.setup({
+  -- Enable LSP snippets
+  snippet = {
+    expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body)
+    end,
+  },
+  mapping = {
+    ['<C-p>'] = cmp.mapping.select_prev_item(),
+    ['<C-n>'] = cmp.mapping.select_next_item(),
+    -- Add tab support
+    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+    ['<Tab>'] = cmp.mapping.select_next_item(),
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.close(),
+    ['<CR>'] = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Insert,
+      select = true,
+    })
+  },
+
+  -- Installed sources
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'vsnip' },
+    { name = 'path' },
+    { name = 'buffer' },
+  },
+})
+EOF
+
+
 "==============================================================================
 " VIM Activate theme
 "==============================================================================
@@ -609,7 +728,6 @@ let g:indentLine_setColors = 1
 let g:indentLine_char_list = [':','¦','|', '┃', '║', '░','▒','█']
 let g:indentLine_setConceal = 1
 let g:indentLine_enabled = 1
-
 
 let g:tagbar_type_rust = {
    \ 'ctagstype' : 'rust',
