@@ -1,5 +1,7 @@
 "==============================================================================
 " INITIAL SETUP
+" If having syntax error, use command:
+"  export VIMRUNTIME=/usr/share/vim/vim82
 "
 " - TMUX: Reduce escape delay
 " add 'set -sg escape-time 1'
@@ -143,13 +145,10 @@ else
 " VIM plugin manager
 call plug#begin('~/.config/nvim/plugged')
 
-" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 " VIM theme
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'patstockwell/vim-monokai-tasty'
-Plug 'arzg/vim-rust-syntax-ext'
 
 " Code/git modifications
 Plug 'mhinz/vim-signify'
@@ -158,13 +157,7 @@ Plug 'mhinz/vim-signify'
 Plug 'mbbill/undotree'
 nnoremap <leader>us :UndotreeShow<CR>
 
-" Functions in code
-Plug 'majutsushi/tagbar'
-nmap <leader>tb :TagbarToggle<CR>
-
 " Airline Stuff
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'itchyny/lightline.vim'
 Plug 'edkolev/promptline.vim'
 Plug 'powerline/powerline'
@@ -172,37 +165,6 @@ Plug 'edkolev/tmuxline.vim'
 
 " TMUX stuff
 Plug 'christoomey/vim-tmux-navigator'
-
-" Rust
-Plug 'rust-lang/rust.vim'
-Plug 'dense-analysis/ale'
-" https://sharksforarms.dev/posts/neovim-rust/
-" Plug 'neovim/nvim-lspconfig'
-" Plug 'hrsh7th/nvim-cmp'
-" Plug 'hrsh7th/cmp-nvim-lsp'
-" Plug 'hrsh7th/cmp-vsnip'
-" Plug 'hrsh7th/cmp-path'
-" Plug 'hrsh7th/cmp-buffer'
-" Plug 'simrat39/rust-tools.nvim'
-Plug 'hrsh7th/vim-vsnip'
-" Plug 'nvim-lua/popup.nvim'
-" Plug 'nvim-lua/plenary.nvim'
-" Plug 'nvim-telescope/telescope.nvim'
-
-" Elixir
-Plug 'elixir-editors/vim-elixir'
-
-" Javascript
-Plug 'pangloss/vim-javascript'
-Plug 'leafgarland/typescript-vim'
-Plug 'maxmellon/vim-jsx-pretty'
-
-" CSharp
-" Plug 'OmniSharp/omnisharp-vim'
-" nmap <leader>or :OmniSharpRestartServer<CR>
-" nmap <leader>ou :OmniSharpFixUsings<CR>
-" nmap <leader>oa :OmniSharpGetCodeActions<CR>
-" nmap <leader>od :OmniSharpGotoDefinition<CR>
 
 " Code Completion
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
@@ -212,8 +174,6 @@ Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 "==============================================================================
 " VIM autocomplete suggestions
 "==============================================================================
-" You will need to install racer via cargo
-Plug 'racer-rust/vim-racer'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Install following manually:
 " :CocInstall coc-rls
@@ -384,11 +344,6 @@ nnoremap <leader>i <C-W><C-L>
 " - move left
 nnoremap <leader>h <C-W><C-H>
 
-Plug 'shougo/denite.nvim'
-Plug 'rhysd/rust-doc.vim'
-map <leader>df :RustDocFuzzy<Space>
-map <leader>dm :RustDocModule<Space>
-
 " Sessions
 Plug 'tpope/vim-obsession'
 " :mksession = create session as Session.vim in cwd
@@ -411,31 +366,14 @@ nnoremap me [`
 " View all marks
 "   m/
 
-Plug 'jparise/vim-graphql'
-
 " Have same bash shortcuts in Insert mode
 Plug 'tpope/vim-rsi'
-
-
-" post install (yarn install | npm install) then load plugin only for editing supported files
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
-
 
 call plug#end()
 
 "==============================================================================
 "Activate Plug features
 "==============================================================================
-
-" Rust Docs
-let g:rust_doc#downloaded_rust_doc_dir = '~/rust-docs/'
-
-let g:racer_cmd = "~/.cargo/bin/racer"
-
-let g:racer_experimental_completer = 1
-let g:racer_insert_paren = 0
 
 let g:rainbow_active = 1
 let g:rainbow_load_separately = [
@@ -504,46 +442,6 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ }
 
 
-" Ale
-let g:ale_rust_rustfmt_options = '--edition 2018'
-let g:ale_linter_aliases = {'js': ['javascript']}
-let g:ale_linters = {'rust': ['analyzer', 'cargo'], 'jsx': ['stylelint','eslint'], 'elixir': ['elixir-ls']}
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['prettier'],
-\   'css': ['prettier'],
-\   'rust': ['rustfmt'],
-\   'elixir': ['mix_format'],
-\}
-let g:ale_fix_on_save = 1
-let g:ale_rust_cargo_use_clippy = 1
-let g:ale_rust_cargo_check_tests = 1
-let g:ale_rust_cargo_check_examples = 1
-
-" Enable ALE auto completion globally
-let g:ale_completion_enabled = 1
-
-" Allow ALE to autoimport completion entries from LSP servers
-let g:ale_completion_autoimport = 1
-
-" let g:ale_linters = {
-" \ 'cs': ['OmniSharp']
-" \}
-
-" let g:OmniSharp_server_use_mono = 1
-
-" augroup omnisharp_commands
-"   autocmd!
-"
-"   " Show type information automatically when the cursor stops moving.
-"   " Note that the type is echoed to the Vim command line, and will overwrite
-"   " any other messages in this space including e.g. ALE linting messages.
-"   autocmd CursorHold *.cs OmniSharpTypeLookup
-"
-" augroup END
-
-" Rustfmt autosave
-let g:rustfmt_autosave = 0
 " Nerdtree, remap directional keys to arrow keys
 autocmd FileType nerdtree noremap <buffer> e <Up>
 autocmd FileType nerdtree noremap <buffer> n <Down>
