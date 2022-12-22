@@ -4,13 +4,10 @@
 
 ## karabiner-elements
 - https://karabiner-elements.pqrs.org
-- Swap Esc with Caps Lock key
 - Swap left_command with right_command
 - Swap right_command with right_control
-![client](./images/swap_keys.png "client")
 - Add complex modifications rules
-- see karabiner_complex_modifications.json file
-![client](./images/complex_modifications.png "client")
+  - see karabiner_complex_modifications.json file
 
 ```
 COLEMAK
@@ -19,32 +16,39 @@ left_command + h                       ║ arrow left
 left_command + j                       ║ arrow down
 left_command + k                       ║ arrow up
 left_command + l                       ║ arrow right
-right_command + right_control + r      ║ open bracket [ 
-right_command + right_control + s      ║ open curly bracket { 
-right_command + right_control + t      ║ open parenthesis ( 
-right_command + right_control + n      ║ open parenthesis ) 
-right_command + right_control + e      ║ close curly bracket } 
-right_command + right_control + i      ║ close bracket ] 
+right_command + right_control + r      ║ open bracket [
+right_command + right_control + s      ║ open curly bracket {
+right_command + right_control + t      ║ open parenthesis (
+right_command + right_control + n      ║ open parenthesis )
+right_command + right_control + e      ║ close curly bracket }
+right_command + right_control + i      ║ close bracket ]
 ╚══════════════════════════════════════╩══════════════════════════════════════╝
 ```
-## Increase key speed
-![client](./images/mac_keyboard_speed.png "client")
+# System Preferences
+## Keyboard
+- Modifier Keys > CapsLock = Escape
+- Increase key speed = FAST max setting
 
-## Turn off press and hold and dictionary 
+## Turn off press and hold and dictionary
 ```
-defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool falsedefaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 70 '<dict><key>enabled</key><false/></dict>'
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 70 '<dict><key>enabled</key><false/></dict>'
 ```
-## Remove all text modifications in Keyboard settings
-![client](./images/keyboard_text.png "client")
+## Keyboard > Text
+- Remove all text modifications in Keyboard settings
 
-## Mac App Shortcuts
+## Mac App Shortcuts for <AppName>
 - System Preferences > Keyboard > App Shortcuts
-- Change Chrome shortcuts
-![client](./images/chrome_shortcuts.png "client")
+- "Google Chrome.app"
+  - Menu Title = Close Tab
+  - Menu Title = Select Next Tab
+  - Menu Title = Select Previous Tab
 
 ## Mac Mission Control
 - System Preferences > Keyboard > Mission Control
-![client](./images/mission_control.png "client")
+  - Mission Control
+  - Mission Control > Move Left Space
+  - Mission Control > Move Right Space
 ```
 ╔══════════════════════════════════════╦══════════════════════════════════════╗
 left_command + j                       ║ move desktop window left
@@ -53,20 +57,13 @@ left_command + ;                       ║ move desktop window right
 ```
 
 ## Terminal
-- Alacritty
-- https://github.com/alacritty/alacritty
-```
-brew cask install alacritty
-```
-- Install Ranger
-```
-https://github.com/ranger/ranger
-```
+- Linux = Tilix
+- Mac = iTerm2
 
 ## Multiplexer
 - Tmux + Oh-my-zsh
 - Use zshrc
-- Use tmux.conf and tmux.conf.local 
+- Use tmux.conf and tmux.conf.local
 ```
 ╔══════════════════════════════════════╦══════════════════════════════════════╗
 right_command + tab                    ║ toggle terminal               *remap*
@@ -77,39 +74,14 @@ right_command + w > , > enter          ║ rename tab
 right_command + w > x > y > enter      ║ close window
 right_command + w > %                  ║ split window vertical
 right_command + w > "                  ║ split window horizontal
-right_command + w > {                  ║ swap window with left 
+right_command + w > {                  ║ swap window with left
 right_command + w > }                  ║ swap window with right
 right_command + w > z                  ║ toggle split window expand
 right_command + w > h                  ║ move left split window
 right_command + w > l                  ║ move right split window
-right_command + r > {word}             ║ reverse search command history 
+right_command + r > {word}             ║ reverse search command history
 ╚══════════════════════════════════════╩══════════════════════════════════════╝
 ```
-
-## Shell Alias
-```
-vim ~/.zshrc
-alias g="git"
-alias p="python3"
-alias c="git add . && git commit -m 'quick deploy' && git push"
-alias v=". venv/bin/activate"
-source ~/.zshrc
-```
-# Bookmarks (disabled)
-```
-╔══════════════════════════════════════╦══════════════════════════════════════╗
-m                                      ║ toggle bookmark line          *remap* 
-n                                      ║ toggle next bookmark          *remap* 
-space                                  ║ list bookmarks                *remap*
-left_command + l                       ║ move to next bookmark         *remap* 
-╚══════════════════════════════════════╩══════════════════════════════════════╝
-```
-
-# Editor VIM+VSCode   
-- read: http://vimdoc.sourceforge.net/htmldoc/vimindex.html
-- read: http://tnerual.eriogerg.free.fr/vimqrc.html
-- vscode 'when' conditions:
-  - https://code.visualstudio.com/docs/getstarted/keybindings#_contexts
 
 ## Macros
 - use for repetitive for hotkeys
@@ -122,7 +94,7 @@ shift + 2 > {char}                     ║ use macro {char}
 ```
 
 ## Motion
-- enable sneak plugin (within vscode vim settings) 
+- enable sneak plugin (within vscode vim settings)
 ```
 ╔══════════════════════════════════════╦══════════════════════════════════════╗
 h                                      ║ left
@@ -137,7 +109,7 @@ left_command + k                       ║ move up X lines               *remap*
 $                                      ║ move to end of cursor line
 ' > '                                  ║ move cursor to previous position
 right_command > i                      ║ move cursor history forward
-right_command > o                      ║ move cursor history back 
+right_command > o                      ║ move cursor history back
 left_command + 3                       ║ go to definition of cursor    *remap*
 g > d                                  ║ go to definition of cursor
 s > {char} > {char}                    ║ search for character
@@ -147,15 +119,15 @@ shift + s > {char} > {char} > ;        ║ search backwards next
 f > {char} > ,                         ║ move back to char
 f > {char} > ;                         ║ move forward to char
 shift + f > {char} > ;                 ║ move back to char
-shift + h                              ║ move cursor to top of screen 
-shift + m                              ║ move cursor to middle of screen 
-shift + l                              ║ move cursor to bottom of screen 
+shift + h                              ║ move cursor to top of screen
+shift + m                              ║ move cursor to middle of screen
+shift + l                              ║ move cursor to bottom of screen
 g > i                                  ║ move to last edited section
 g > g                                  ║ move first line of file
 shift + g                              ║ move last line of file
 shift + 5                              ║ move to matching {} or ()
 {number} > shift + g                   ║ move to {num} line
-shift + ; > {num} > enter              ║ move to line {num} 
+shift + ; > {num} > enter              ║ move to line {num}
 ╚══════════════════════════════════════╩══════════════════════════════════════╝
 ```
 
@@ -164,22 +136,22 @@ shift + ; > {num} > enter              ║ move to line {num}
 ╔══════════════════════════════════════╦══════════════════════════════════════╗
 tab                                    ║ escape to enter NORMAL mode
 left_command > click                   ║ multi cursor select
-/ > {word} > enter                     ║ search for word FORWARD 
-? > {word} > enter                     ║ search for word BACKWARD 
+/ > {word} > enter                     ║ search for word FORWARD
+? > {word} > enter                     ║ search for word BACKWARD
 / > {word} > enter > n                 ║ find next
-q > :                                  ║ vim history 
+q > :                                  ║ vim history
 ╚══════════════════════════════════════╩══════════════════════════════════════╝
 ```
 
 ## Insert and Replace
 ```
 ╔══════════════════════════════════════╦══════════════════════════════════════╗
-backspace > x                          ║ delete left                   *remap* 
+backspace > x                          ║ delete left                   *remap*
 : > %s/old/new/g                       ║ replace string
 x                                      ║ delete character in cursor position
 shift + r                              ║ REPLACE mode
 i                                      ║ INSERT mode inbetween
-a                                      ║ INSERT mode append   
+a                                      ║ INSERT mode append
 shift + a                              ║ INSERT mode move to end of line
 v                                      ║ VISUAL mode
 shift + o                              ║ INSERT mode blank ABOVE selected line
@@ -219,7 +191,7 @@ shift + v                              ║ select current line
 v > highlight > o                      ║ swap highlight position
 v > i > w                              ║ select word
 v > i > w > shift + s                  ║ surround mode
-v > i > w > shift + s > {char}         ║ surround with {char} 
+v > i > w > shift + s > {char}         ║ surround with {char}
 v > i > w > y > esc > p                ║ copy word and paste after cursor
 v > i > w > y > esc > P                ║ copy word and paste before cursor
 ╚══════════════════════════════════════╩══════════════════════════════════════╝
@@ -258,7 +230,7 @@ left_command + right_command + .       ║ move window right             *remap*
 ╚══════════════════════════════════════╩══════════════════════════════════════╝
 ```
 
-# Brave Web Browser 
+# Brave/Chrome Web Browser
 - Install [Vimium](https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb) chrome extension
 - Vimium custom mappings
 ```
@@ -286,7 +258,7 @@ unmap gu
 ```
 ```
 ╔══════════════════════════════════════╦══════════════════════════════════════╗
-?                                      ║ open vimium shortcut help 
+?                                      ║ open vimium shortcut help
 g > e                                  ║ edit current url
 shift + h                              ║ go back in history
 shift + l                              ║ go forward in history
@@ -300,8 +272,8 @@ left_command + d                       ║ open new tab                  *remap*
 left_command + l                       ║ focus to search bar
 space                                  ║ scroll down
 shift + space                          ║ scroll up
-left_command + shift + c               ║ open chrome debugger 
-left_command + [                       ║ move previous panel 
-left_command + ]                       ║ move next panel 
+left_command + shift + c               ║ open chrome debugger
+left_command + [                       ║ move previous panel
+left_command + ]                       ║ move next panel
 ╚══════════════════════════════════════╩══════════════════════════════════════╝
 ```

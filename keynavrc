@@ -1,10 +1,10 @@
-# This is a keynavrc file. Yours should live in 
+# This is a keynavrc file. Yours should live in
 # $HOME/.keynavrc
 #
 # Lines beginning with '#' are comments.
 # Format is:
 #   keysequence cmd1,cmd2,cmd3...
-# 
+#
 # The 'start' command alone is handled specially, in that any key sequence
 # mapped to 'start' will be grabbed when keynav starts up so you can invoke it
 # to activate keynav. The remaining keys are only recognized while keynav is
@@ -20,9 +20,9 @@ clear      # clear all previous keybindings
 #ctrl+semicolon start, sh "exec transset-df -i $(xdotool search --class keynav) 0.3"
 g grid-nav toggle
 Tab restart
-#ctrl+semicolon start, grid 3x3 
+#ctrl+semicolon start, grid 3x3
 ctrl+Delete start, grid 3x3
-ctrl+Tab start, grid 3x3,cursorzoom 70 70 
+ctrl+Tab start, grid 3x3,cursorzoom 70 70
 f cell-select 2x1,warp,click 1,end # up
 shift+f cell-select 2x1,warp,click 1, click 1,end # up
 t cell-select 3x2,warp,click 1,end # right
@@ -45,9 +45,9 @@ shift+s cell-select 2x2,warp,click 1, click 1,end # center
 # alt+semicolon start,move-right
 Escape end
 # ctrl+bracketleft end
-shift+u cell-select 2x1,warp, cursorzoom 70 70 # up 
-shift+l cell-select 1x1,warp, cursorzoom 70 70 # up-left 
-shift+y cell-select 3x1,warp, cursorzoom 70 70 # up-right 
+shift+u cell-select 2x1,warp, cursorzoom 70 70 # up
+shift+l cell-select 1x1,warp, cursorzoom 70 70 # up-left
+shift+y cell-select 3x1,warp, cursorzoom 70 70 # up-right
 shift+comma cell-select 2x3,warp, cursorzoom 70 70 # down
 shift+m cell-select 1x3,warp, cursorzoom 70 70 # down-left
 shift+period cell-select 3x3,warp, cursorzoom 70 70 # down-right
@@ -123,7 +123,7 @@ b history-back
 #shift+k move-up .50
 #shift+l move-right .50
 
-### Example using a 2-row, 3-column grid, 
+### Example using a 2-row, 3-column grid,
 # mapped to Insert/Home/PageUp/etc...
 # period grid 9x9
 #Insert cell-select 1x1
