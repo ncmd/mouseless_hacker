@@ -2,6 +2,8 @@
 # Custom Keybinds
 sudo apt install python3-pip
 sudo pip3 install xkeysnail
+sudo crontab -e
+@reboot /home/user/.xkeysnail.sh
 
 
 # Default Terminal
