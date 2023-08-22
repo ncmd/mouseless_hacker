@@ -168,20 +168,26 @@ Plug 'christoomey/vim-tmux-navigator'
 
 " Code Completion
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
-" 9000+ Snippets
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 
 "==============================================================================
 " VIM autocomplete suggestions
 "==============================================================================
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neovim/nvim-lspconfig'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'mattn/vim-lsp-settings'
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-rails'
+
 " Install following manually:
 " :CocInstall coc-rls
 " :CocInstall coc-elixir
 
-nmap <leader>ca :CocAction<CR>
-nmap <leader>cn :CocDisable<CR>:ALEDisable<CR>
-nmap <leader>ce :CocEnable<CR>:CocRestart<CR>:ALEEnable<CR>
 " GoTo code navigation.
 nmap <leader>do <Plug>(rust-doc)
 nmap <leader>gd <Plug>(coc-definition)
@@ -192,20 +198,7 @@ nmap <leader>ge <Plug>(coc-diagnostic-next-error)
 nmap <leader>gi <Plug>(coc-diagnostic-info)
 nnoremap <leader>cr :CocRestart<CR>
 
-" Code navigation shortcuts
-nnoremap <leader>E     <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <leader>Ei    <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <leader>Et    <cmd>lua vim.lsp.buf.type_definition()<CR>
-nnoremap <leader>Er    <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <leader>Es    <cmd>lua vim.lsp.buf.document_symbol()<CR>
-nnoremap <leader>Ew    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-nnoremap <leader>Ed    <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <leader>Ea    <cmd>lua vim.lsp.buf.code_action()<CR>
-
-
 set wildmode=longest,list,full
-
-" Plug 'sheerun/vim-polyglot'
 
 "==============================================================================
 " File/content search
@@ -228,15 +221,6 @@ map /// :let @/ = ""<CR>
 Plug 'haya14busa/incsearch.vim'
 map f/  <Plug>(incsearch-forward)
 map f?  <Plug>(incsearch-backward)
-map fg/ <Plug>(incsearch-stay)
-Plug 'haya14busa/incsearch-fuzzy.vim'
-map / <Plug>(incsearch-fuzzy-/)
-map ? <Plug>(incsearch-fuzzy-?)
-map g/ <Plug>(incsearch-fuzzy-stay)
-Plug 'haya14busa/incsearch-easymotion.vim'
-map z/ <Plug>(incsearch-easymotion-/)
-map z? <Plug>(incsearch-easymotion-?)
-map zg/ <Plug>(incsearch-easymotion-stay)
 
 " Markdown parsing
 Plug 'gabrielelana/vim-markdown'
@@ -345,21 +329,21 @@ nnoremap <leader>i <C-W><C-L>
 nnoremap <leader>h <C-W><C-H>
 
 " Sessions
-Plug 'tpope/vim-obsession'
+" Plug 'tpope/vim-obsession'
 " :mksession = create session as Session.vim in cwd
-map <leader>mk :mksession!<CR>
+" map <leader>mk :mksession!<CR>
 "
 " :Obsess = start record session
 " :Obsess! = end record session
 
-Plug 'kshenoy/vim-signature'
+" Plug 'kshenoy/vim-signature'
 " mark
 " nnoremap ma <NOP>
 " nnoremap mt <NOP>
 " nnoremap mm <NOP>
 " remove mark
 "   m
-map mx m-
+" map mx m-
 " next and previous mark
 nnoremap mn ]`
 nnoremap me [`
@@ -374,6 +358,8 @@ call plug#end()
 "==============================================================================
 "Activate Plug features
 "==============================================================================
+"" What do we use for linting
+let g:coc_global_extensions = ['coc-solargraph']
 
 let g:rainbow_active = 1
 let g:rainbow_load_separately = [
