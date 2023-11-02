@@ -12,7 +12,7 @@ Use a computer without a mouse like a true hacker
 5. Install [NeoVim](https://neovim.io/)
 - Review ``.vimrc`` file
 - Create vim file : ``touch ~/.vimrc``
-- Create symbolic link: ``ln ~/.vimrc ~/.config/nvim/init.vim``
+- [ ] Create symbolic link: ``ln ~/.vimrc ~/.config/nvim/init.vim``
 - Check health in nvim and follow instructions `:CheckHealth`
 - Optional, Install CoC](https://github.com/neoclide/coc.nvim)
 6. Install [vim-plug](https://github.com/junegunn/vim-plug)

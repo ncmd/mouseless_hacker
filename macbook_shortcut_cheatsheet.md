@@ -4,10 +4,9 @@
 
 ## karabiner-elements
 - https://karabiner-elements.pqrs.org
-- Swap left_command with right_command
-- Swap right_command with right_control
+- Swap capslock with escape
 - Add complex modifications rules
-  - see karabiner_complex_modifications.json file
+- see karabiner_complex_modifications_mac.json file
 
 ```
 COLEMAK

@@ -36,7 +36,7 @@ if [ ${machine} == "Mac" ]; then
     brew cask install karabiner-elements
     brew cask reinstall karabiner-elements
     mkdir -p ~/.config/karabiner/assets/complex_modifications/
-    cp ./karabiner_complex_modifications_kinesis.json ~/.config/karabiner/assets/complex_modifications/mods.json
+    cp ./karabiner_complex_modifications_kinesis_mac.json ~/.config/karabiner/assets/complex_modifications/mods.json
 
     # === NEOVIM ===
     # VIM Plugin Manager
@@ -62,24 +62,9 @@ if [ ${machine} == "Mac" ]; then
     nvim -E -c ":PlugInstall" -c qa!
     nvim -E -c ":source ~/.vimrc" -c qa!
 
-    # === RUST ===
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-    rustup component add rls rust-analysis rust-src
-    rustup toolchain add nightly
-    rustup toolchain add stable
-    cargo install --force cargo-make
-    cargo install pier
-    brew tap federico-terzi/espanso
-    brew install espanso
-    brew reinstall espanso
-    mkdir -p ~/Library/Preferences/espanso/user
-    cp -r ./espanso ~/Library/Preferences/espanso
-
     # === FZF ===
     brew install fzf
     brew reinstall fzf
-    brew tap ajeetdsouza/zoxide
-    brew install zoxide
     $(brew --prefix)/opt/fzf/install
 
     # === TMUX ===
@@ -115,18 +100,6 @@ if [ ${machine} == "Mac" ]; then
     # gestures
     cp ./.GlobalPreferences.plist ~/Library/Preferences/.GlobalPreferences.plist
 
-    # === GIT PROJECTS ===
-    git config --global user.name "Charles"
-    mkdir -p ~/go/src/securethebox_rs/
-    cd ~/go/src/securethebox_rs/
-    git clone https://github.com/cavalrytactics/securethebox_client_rs
-    git clone https://github.com/cavalrytactics/securethebox_server_rs
-    brew install travis
-    
     # === BROWSER ===
     # Extensions: GoogleAdOptOut,DarkReader,Vimium,UblockOrigin
-    
-    # === GOOGLE CLOUD SDK ===
-    brew cask install google-cloud-sdk
-    brew cask reinstall google-cloud-sdk
 fi
