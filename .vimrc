@@ -207,6 +207,9 @@ set wildmode=longest,list,full
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 map <leader><BS> :Files<CR>
+
+" the_silver_searcher
+map <leader>? :Ag<CR>
 " find text
 Plug 'easymotion/vim-easymotion'
 " activate = s

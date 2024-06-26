@@ -22,6 +22,7 @@ Use a computer without a mouse like a true hacker
 - Copy ``tmux.conf file to proper location``
 8. Install [Oh-my-zsh](https://ohmyz.sh/)
 8. Install [FZF with fuzzy auto completion](https://github.com/junegunn/fzf)
+8. Install [The Silver Searcher](https://github.com/ggreer/the_silver_searcher)
 9. Read macbook_shortcut_cheatsheet.md
 10. Practice typing at keybr.com
 11. Linux only [Try keynav](https://github.com/jordansissel/keynav/)
