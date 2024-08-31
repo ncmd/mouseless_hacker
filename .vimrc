@@ -127,6 +127,8 @@ else
   nnoremap M <NOP>
   nnoremap j <NOP>
   nnoremap k <NOP>
+" disable f1
+  nnoremap <F1> <NOP>
 
 " markdown hidden maps
 " <leader> = on a line with '- '
@@ -183,8 +185,18 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-rails'
+Plug 'ray-x/go.nvim'
+
+Plug 'othree/html5.vim'
+Plug 'ap/vim-css-color'
+Plug 'pangloss/vim-javascript'
+Plug 'JoosepAlviste/nvim-ts-context-commentstring'
+" Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'w0rp/ale'
 
 " Install following manually:
+" :CocInstall coc-svelte
 " :CocInstall coc-rls
 " :CocInstall coc-elixir
 
@@ -298,6 +310,7 @@ map <leader>cd :NERDTreeFind<CR>
 " - Select next/previous tab
 map <leader>w :tabnext<CR>
 map <leader>q :tabprevious<CR>
+map <leader>x :tabclose<CR>
 
 "==============================================================================
 " WINDOWS
@@ -362,7 +375,7 @@ call plug#end()
 "Activate Plug features
 "==============================================================================
 "" What do we use for linting
-let g:coc_global_extensions = ['coc-solargraph']
+" let g:coc_global_extensions = ['coc-solargraph']
 
 let g:rainbow_active = 1
 let g:rainbow_load_separately = [
