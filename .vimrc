@@ -332,7 +332,7 @@ map <leader>NN :sp<CR>
 map <leader>dd :q!<CR>
 map <leader>DD :qa!<CR>
 " :q! = close window
-map <leader>ss :w<CR><C-c>
+map <leader>ss :%s/\s\+$//e<CR> :w<CR><C-c>
 
 " WINDOW NAVIGATION
 " - move down
