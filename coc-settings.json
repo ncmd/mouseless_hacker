@@ -1,4 +1,7 @@
 {
+    "pyright.inlayHints.variableTypes": false,
+    "pyright.inlayHints.parameterTypes": false,
+    "pyright.inlayHints.functionReturnTypes": false,
     "suggest.floatEnable": true,
     "suggest.enablePreview": true,
     "signature.target": "float",
@@ -7,11 +10,4 @@
     "coc.preferences.hoverTarget": "float",
     "coc.preferences.messageLevel": "more",
     "coc.preferences.formatOnSaveFiletypes": [],
-    "rust.show_hover_context": true,
-    "rust.full_docs": true,
-    "rust.racer_completion": true,
-    "rust-analyzer.diagnostics.enable": true,
-    "rust-client.revealOutputChannelOn": "error",
-    "rust-client.updateOnStartup": true,
-    "rust-client.channel": "stable"
 }
