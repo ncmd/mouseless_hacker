@@ -195,6 +195,9 @@ Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'w0rp/ale'
 
+"love25
+Plug 'S1M0N38/love2d.nvim'
+
 " Install following manually:
 " :CocInstall coc-svelte
 " :CocInstall coc-rls
@@ -261,6 +264,19 @@ Plug 'tpope/vim-abolish'
 " fooBar -> foo bar = cr<space> (space case)
 " fooBar -> Foo Bar = crt (Title Case)
 
+map <leader>s' ysiw'
+map <leader>s" ysiw"
+map <leader>s] ysiw]
+map <leader>s) ysiw)
+map <leader>s} ysiw}
+map <leader>s> ysiw>
+map <leader>s. ysiw.
+map <leader>s, ysiw,
+map <leader>s, ysiw,
+map <leader>s* ysiw*
+nnoremap <leader>std idatetime.strptime(ts, "%Y-%m-%dT%H:%M:%S.%fZ")<Esc>
+nnoremap <leader>dts its.strftime("%Y-%m-%dT%H:%M:%S.%fZ")<Esc>
+nnoremap <leader>tds idef dt_ts(td): return f"{td.days}d, {td.seconds//3600}h, {(td.seconds%3600)//60}m, {td.seconds%60}s"<Esc>
 "==============================================================================
 " Auto-format file on save
 "==============================================================================
@@ -623,4 +639,34 @@ map <leader>FC :PlugClean<CR>
 map <leader>FU :PlugUpdate<CR>
 map <leader>FJ :%!python3 -m json.tool<CR>
 
+" require'lspconfig'.pyright.setup{}
+
 endif
+
+" " Ensure LSP config is loaded
+" lua << EOF
+"   -- Require the 'nvim-lspconfig' module
+"   local lspconfig = require('lspconfig')
+"
+"   -- Set up the Lua Language Server
+"   lspconfig.lua_ls.setup{
+"     settings = {
+"       Lua = {
+"         runtime = {
+"           version = 'LuaJIT',  -- Use LuaJIT for Lua runtime
+"         },
+"         diagnostics = {
+"           globals = {'vim'},  -- Recognize 'vim' as a global variable
+"         },
+"         workspace = {
+"           library = vim.api.nvim_get_runtime_file("", true),  -- Include Neovim runtime files in the workspace
+"         },
+"         telemetry = {
+"           enable = false,  -- Disable telemetry
+"         },
+"       },
+"     },
+"   }
+" EOF
+
+lua require'lspconfig'.lua_ls.setup{}
