@@ -176,7 +176,7 @@ Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 " VIM autocomplete suggestions
 "==============================================================================
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'neovim/nvim-lspconfig'
+Plug 'neovim/nvim-lspconfig'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
@@ -194,6 +194,9 @@ Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 " Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'w0rp/ale'
+
+Plug 'andrejlevkovitch/vim-lua-format'
+Plug 'mhartington/formatter.nvim'
 
 "love25
 Plug 'S1M0N38/love2d.nvim'
@@ -668,5 +671,6 @@ endif
 "     },
 "   }
 " EOF
-
-lua require'lspconfig'.lua_ls.setup{}
+" autocmd FileType lua nnoremap <buffer> <c-k> :call LuaFormat()<cr>
+autocmd BufWrite *.lua call LuaFormat()
+" lua require'lspconfig'.lua_ls.setup{}

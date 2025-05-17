@@ -1,3 +1,18 @@
+# bluetooth
+```
+sudo rmmod btusb
+sudo modprobe btusb
+sudo btmon
+```
+
+# system
+- remove all shortcuts
+- install gnome-tweaks
+- change super key to backspace???
+```
+sudo apt install gnome-tweaks
+```
+
 # startup apps
 - tilix
 
@@ -43,11 +58,13 @@ ln -s ~/.vimrc ~/.config/nvim/init.vim
 sudo apt-add-repository -y ppa:rael-gc/rvm
 sudo apt-get update
 sudo apt-get install rvm
-rvm install 3.2.1
+rvm install 3.2.1 (might not need?)
 sudo apt-get install ruby-dev 
 gem install rerun
+chown the path
 ```
 
 # fzf
 - download from releases
 - cp to /usr/local/sbin or /bin
+
