@@ -18,7 +18,7 @@ sudo apt install gnome-tweaks
 
 # xkeysnail
 - system settings
-  - autologin
+  - [ ] autologin
 ```
 sudo groupadd -f uinput
 sudo gpasswd -a $USER uinput
@@ -31,10 +31,14 @@ KERNEL=="event[0-9]*", GROUP="uinput", MODE="0660"
 EOF
 ```
 
-- create bash script
+- create bash script (xkeys.sh)
 ```
 xhost +SI:localuser:root
 sudo xkeysnail /usr/local/sbin/xkeysnail_config.py -q
+```
+- add to zshrc
+```
+bash xkeys.sh
 ```
 
 # tilix
