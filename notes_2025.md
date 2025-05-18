@@ -22,6 +22,8 @@ sudo apt install gnome-tweaks
 ```
 sudo groupadd -f uinput
 sudo gpasswd -a $USER uinput
+echo "$USER ALL = (root) NOPASSWD: /usr/local/bin/xkeysnail" | sudo tee /etc/sudoers.d/xkeysnail
+echo "xhost +SI:localuser:root" > ~/.xsessionrc
 
 cat <<EOF | sudo tee /etc/udev/rules.d/70-xkeysnail.rules
 KERNEL=="uinput", GROUP="uinput", MODE="0660", OPTIONS+="static_node=uinput"
