@@ -1,5 +1,9 @@
 # bluetooth
 ```
+bluetoothctl
+pair <UUID>
+trust <UUID>
+connect <UUID>
 sudo rmmod btusb
 sudo modprobe btusb
 sudo btmon
@@ -7,11 +11,8 @@ sudo btmon
 
 # system
 - remove all shortcuts
-- install gnome-tweaks
+- change tab to esc
 - change super key to backspace???
-```
-sudo apt install gnome-tweaks
-```
 
 # startup apps
 - tilix
@@ -41,10 +42,17 @@ sudo xkeysnail /usr/local/sbin/xkeysnail_config.py -q
 bash xkeys.sh
 ```
 
+# tmux
+```
+cp ./mouseless_hacker/.tmux.conf ~/.tmux.conf
+tmux source-file ~/.tmux.conf
+```
+
+
 # tilix
 - profile
 - startup command: ``tmux``
-- tmux new-session -s "tmp" /home/user/xkey.sh
+- tmux new-session -s "tmp" /home/user/xkeys.sh
 
 # installing nvim
 - download release
