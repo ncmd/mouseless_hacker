@@ -1,0 +1,12 @@
+[Unit]
+Description=Auto reconnect Bluetooth device
+After=bluetooth.service
+Requires=bluetooth.service
+
+[Service]
+Type=oneshot
+ExecStart=/home/user/bcon.sh
+
+[Install]
+WantedBy=default.target
+
