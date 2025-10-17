@@ -6,7 +6,7 @@ from xkeysnail.transform import *
 #     Key.SPACE: [Key.SPACE, Key.LEFT_CTRL],
 #     Key.RIGHT_SHIFT: [Key.GRAVE, Key.RIGHT_SHIFT],
 # })
-define_conditional_multipurpose_modmap(lambda wm_class: wm_class in ("Tilix|Brave-browser|Google-chrome|VirtualBox Machine|VirtualBox Manager|Github Desktop|firefox|dota2|Dota2|Dota 2|dota 2|discord|Discord|Cursor|cursor|code|Code|VSCode|vscode|install4j-jclient-Launcher"), {
+define_conditional_multipurpose_modmap(lambda wm_class: wm_class in ("Tilix|Brave-browser|Google-chrome|VirtualBox Machine|VirtualBox Manager|Github Desktop|firefox|dota2|Dota2|Dota 2|dota 2|discord|Discord|Cursor|cursor|code|Code|VSCode|vscode|install4j-jclient-Launcher|Godot_Editor|Godot"), {
     Key.BACKSPACE: [Key.BACKSPACE, Key.LEFT_META],
     Key.SPACE: [Key.SPACE, Key.LEFT_CTRL],
     Key.RIGHT_SHIFT: [Key.GRAVE, Key.RIGHT_SHIFT],
