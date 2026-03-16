@@ -50,6 +50,9 @@ set breakindent
 let &showbreak='    '
 
 set undodir=~/.vim/undodir
+set undofile
+set scrolloff=8
+set signcolumn=yes
 
 highlight ColorColumn ctermbg=0 guibg=#303030
 
@@ -147,6 +150,9 @@ else
 " VIM plugin manager
 call plug#begin('~/.config/nvim/plugged')
 
+Plug 'nvim-tree/nvim-web-devicons'
+Plug 'MeanderingProgrammer/render-markdown.nvim'
+
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 " VIM theme
 Plug 'dracula/vim', { 'as': 'dracula' }
@@ -169,8 +175,8 @@ Plug 'edkolev/tmuxline.vim'
 Plug 'christoomey/vim-tmux-navigator'
 
 " Code Completion
-Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
-Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+"Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+"Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 
 "==============================================================================
 " VIM autocomplete suggestions
@@ -187,11 +193,15 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-rails'
 Plug 'ray-x/go.nvim'
 
+" Rust
+Plug 'rust-lang/rust.vim'
+Plug 'simrat39/rust-tools.nvim'
+
 Plug 'othree/html5.vim'
 Plug 'ap/vim-css-color'
 Plug 'pangloss/vim-javascript'
 Plug 'JoosepAlviste/nvim-ts-context-commentstring'
-" Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'w0rp/ale'
 
@@ -390,6 +400,11 @@ Plug 'tpope/vim-rsi'
 
 call plug#end()
 
+" render-markdown.nvim setup
+lua << EOF
+  require('render-markdown').setup({})
+EOF
+
 "==============================================================================
 "Activate Plug features
 "==============================================================================
@@ -479,6 +494,11 @@ let g:EasyMotion_smartcase = 1
 " RUST + LSP
 "==============================================================================
 
+
+" Rust settings
+let g:rustfmt_autosave = 1
+let g:rustfmt_command = 'rustfmt'
+let g:rust_clip_command = 'xclip -selection clipboard'
 
 " Set completeopt to have a better completion experience
 " :help completeopt
@@ -674,3 +694,83 @@ endif
 " autocmd FileType lua nnoremap <buffer> <c-k> :call LuaFormat()<cr>
 autocmd BufWrite *.lua call LuaFormat()
 " lua require'lspconfig'.lua_ls.setup{}
+
+"==============================================================================
+" Rust LSP (rust-analyzer) + file reading helpers
+"==============================================================================
+lua << EOF
+  -- rust-analyzer setup (vim.lsp.config API, nvim 0.11+)
+  vim.lsp.config('rust_analyzer', {
+    cmd = { 'rust-analyzer' },
+    filetypes = { 'rust' },
+    root_markers = { 'Cargo.toml', 'rust-project.json' },
+    settings = {
+      ["rust-analyzer"] = {
+        cargo = {
+          allFeatures = true,
+          loadOutDirsFromCheck = true,
+        },
+        checkOnSave = {
+          command = "clippy",
+        },
+        procMacro = {
+          enable = true,
+        },
+        diagnostics = {
+          enable = true,
+          experimental = { enable = true },
+        },
+        inlayHints = {
+          enable = true,
+          chainingHints = true,
+          typeHints = true,
+          parameterHints = true,
+        },
+      },
+    },
+  })
+  vim.lsp.enable('rust_analyzer')
+
+  -- LSP keymaps (attached per-buffer when an LSP client connects)
+  vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(args)
+      local opts = { noremap=true, silent=true, buffer=args.buf }
+      vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition, opts)
+      vim.keymap.set('n', '<leader>gt', vim.lsp.buf.type_definition, opts)
+      vim.keymap.set('n', '<leader>gr', vim.lsp.buf.references, opts)
+      vim.keymap.set('n', '<leader>gi', vim.lsp.buf.implementation, opts)
+      vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+      vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+      vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
+      vim.keymap.set('n', '<leader>ge', vim.diagnostic.goto_next, opts)
+      vim.keymap.set('n', '<leader>gE', vim.diagnostic.goto_prev, opts)
+      vim.keymap.set('n', '<leader>dl', vim.diagnostic.setloclist, opts)
+    end,
+  })
+
+  -- Diagnostic display settings
+  vim.diagnostic.config({
+    virtual_text = true,
+    signs = true,
+    underline = true,
+    update_in_insert = false,
+    severity_sort = true,
+  })
+EOF
+
+" Rust file type settings
+autocmd FileType rust setlocal colorcolumn=100 textwidth=100
+autocmd FileType rust setlocal makeprg=cargo\ build
+autocmd FileType rust nnoremap <buffer> <leader>rb :!cargo build<CR>
+autocmd FileType rust nnoremap <buffer> <leader>rt :!cargo test<CR>
+autocmd FileType rust nnoremap <buffer> <leader>rr :!cargo run<CR>
+autocmd FileType rust nnoremap <buffer> <leader>rc :!cargo clippy<CR>
+
+" Disable spell checking (often enabled by markdown/language plugins)
+set nospell
+autocmd FileType * setlocal nospell
+
+" File reading helpers
+set lazyredraw
+nnoremap <leader>fn :set number! relativenumber!<CR>
+nnoremap <leader>fw :set wrap!<CR>
