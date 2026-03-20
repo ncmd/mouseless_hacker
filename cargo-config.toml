@@ -1,0 +1,12 @@
+[build]
+rustc-wrapper = "sccache"
+# Cap at 8 globally — prevents PSU overcurrent when multiple agents
+# build concurrently. Threadripper 3990X draws >280W at full all-core load;
+# 2 agents × 8 jobs × 4 threads = safe power envelope under OCP threshold.
+jobs = 8
+
+[registries.crates-io]
+protocol = "sparse"
+
+[target.x86_64-unknown-linux-gnu]
+rustflags = ["-C", "link-arg=-fuse-ld=mold", "-Z", "threads=4"]

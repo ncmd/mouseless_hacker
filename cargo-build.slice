@@ -1,0 +1,16 @@
+[Unit]
+Description=CPU/Memory limit for cargo builds (PSU OCP prevention)
+
+[Slice]
+# Allow up to 24 cores (2400%) out of 128 threads on Threadripper 3990X.
+# 24 cores × ~5W per core under AVX = ~120W CPU draw — well under PSU OCP.
+# Previous value (4000% / 40 cores) still tripped OCP with 2 concurrent builds.
+CPUQuota=2400%
+# Cap memory to 40GB (of 64GB total) — leaves room for OS + agents.
+MemoryMax=40G
+MemoryHigh=32G
+IOWeight=50
+
+[Install]
+# Auto-start on user login so it's always ready for cargo wrapper
+WantedBy=default.target
